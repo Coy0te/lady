@@ -1,0 +1,56 @@
+/* Général ------------------------------------------------------------------------------------- */
+
+body, p, legend, label, input, span, ul, li, a {
+	font-family: 'Source Sans Pro',sans-serif;
+}
+
+body{
+	margin: 0;
+	padding: 0;
+	background: #eae8dc;
+	line-height: 18px;
+	font-size: 14px;
+}
+
+a{
+	text-decoration: none;
+}
+
+ul{
+	padding: 0;
+	margin: 0;
+}
+
+fieldset {
+    padding: 10px;
+    border: 1px #0568CD solid;
+}
+
+legend {
+    font-weight: bold;
+    color: #0568CD;
+}
+
+.right{
+	float:right;
+}
+
+form .requis {
+    color: #c00;
+}
+
+form .erreur {
+    color: #900;
+}
+
+.clear{
+	clear:both;
+}
+form .succes {
+    color: #090;
+}
+
+form .info {
+    font-style: italic;
+    color: #E8A22B;
+}
