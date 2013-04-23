@@ -47,9 +47,10 @@
 				</h:inputText>
 				<p:message id="prixFactureMessage" for="prixFacture" errorClass="erreur" />
 				<hr/>
-				#{i18n.beneficesCommande} : 
 				<h:panelGroup id="benef">
-					<h:outputText rendered="#{creerCommandeBean.commande.prixFacture != null and creerCommandeBean.commande.prixCoutant != null}" 
+					<h:outputLabel for="benefices">#{i18n.beneficesCommande} = #{creerCommandeBean.commande.prixFacture > creerCommandeBean.commande.prixCoutant ? '+' : ''} </h:outputLabel>
+					<h:outputText id="benefices"
+								  rendered="#{creerCommandeBean.commande.prixFacture != null and creerCommandeBean.commande.prixCoutant != null}" 
 								  value="#{creerCommandeBean.commande.prixFacture - creerCommandeBean.commande.prixCoutant}"/>
 				</h:panelGroup>
 			</fieldset>
