@@ -7,7 +7,7 @@
 
 <resources>
      <jdbc-connection-pool
-          name="bonecpPool" 
+          name="bonecpLadyPool" 
           datasource-classname="com.jolbox.bonecp.BoneCPDataSource"
           transaction-isolation-level="read-committed"
           is-isolation-level-guaranteed="true"
@@ -91,17 +91,17 @@
      <property name="partitionCount" value="1"/>
    
      <!-- Sets the JDBC connection URL. -->
-     <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/bdd_sdzee"/>
+     <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/bdd_lady"/>
    
      <!-- Sets username to use for connections. -->
-     <property name="username" value="java"/>
+     <property name="username" value="root"/>
    
      <!-- Sets username to use for connections. Just delegates to setUsername for clients hardcoded 
           with "setUser" instead. -->
-     <property name="user" value="java"/>
+     <property name="user" value="root"/>
    
      <!-- Sets password to use for connections. -->
-     <property name="password" value="SdZ_eE"/>
+     <property name="password" value="root"/>
    
      <!-- Sets the idleConnectionTestPeriod.  This sets the time (in minutes), for a connection 
           to remain idle before sending a test query to the DB. This is 
@@ -287,5 +287,5 @@
      enabled="true" 
      jndi-name="jdbc/bonecp_resource" 
      object-type="user" 
-     pool-name="bonecpPool"/>
+     pool-name="bonecpLadyPool"/>
 </resources> 
