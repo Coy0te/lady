@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table( name = "mode_paiement" )
+@Table( name = "mode_expedition" )
 public class ModeExpedition {
 
     @Id

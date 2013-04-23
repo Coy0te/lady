@@ -9,6 +9,8 @@ CREATE TABLE  bdd_lady.mode_expedition (
   PRIMARY KEY ( id )
 ) 
 ENGINE = INNODB;
+INSERT INTO mode_expedition (modeExpedition)  VALUES( "圆通 (Yuan Tong)" );
+INSERT INTO mode_expedition (modeExpedition)  VALUES( "顺丰 (Shun Feng)" );
 
 
 CREATE TABLE  bdd_lady.mode_paiement (
