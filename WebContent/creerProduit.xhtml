@@ -22,7 +22,7 @@
 			<p:message id="tailleMessage" for="taille" errorClass="erreur" />
 			
 			<div class="rowButton">
-				<h:commandButton value="#{i18n.creerProduit}" type="submit" action="#{creerProduitBean.creer()}" styleClass="btn btn-primary right-flt">
+				<h:commandButton value="#{i18n.boutonCreerProduit}" type="submit" action="#{creerProduitBean.creer()}" styleClass="btn btn-primary right-flt">
 					<f:ajax execute="@form" render="@form" />
 				</h:commandButton>
 				<h:commandButton value="#{i18n.remettreAZero}" type="reset" styleClass="btn showMarkdownOverview" />

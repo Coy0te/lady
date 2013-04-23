@@ -43,7 +43,7 @@
 			<p:message id="modePaiementMessage" for="modePaiement" errorClass="erreur" />
 			
 			<div class="rowButton">
-				<h:commandButton value="#{i18n.creerClient}" type="submit" action="#{creerClientBean.creer()}" styleClass="btn btn-primary right-flt">
+				<h:commandButton value="#{i18n.boutonCreerClient}" type="submit" action="#{creerClientBean.creer()}" styleClass="btn btn-primary right-flt">
 					<f:ajax execute="@form" render="@form" />
 				</h:commandButton>
 				<h:commandButton value="#{i18n.remettreAZero}" type="reset" styleClass="btn showMarkdownOverview" />

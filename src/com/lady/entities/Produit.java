@@ -19,7 +19,7 @@ public class Produit {
     private String   nom;
     private String   taille;
     @ManyToOne( fetch = FetchType.LAZY )
-    @JoinColumn( name = "id_commande" )
+    @JoinColumn( name = "commande" )
     private Commande commande;
 
     public Long getId() {
@@ -44,13 +44,5 @@ public class Produit {
 
     public void setTaille( String taille ) {
         this.taille = taille;
-    }
-
-    public Commande getCommande() {
-        return commande;
-    }
-
-    public void setCommande( Commande commande ) {
-        this.commande = commande;
     }
 }

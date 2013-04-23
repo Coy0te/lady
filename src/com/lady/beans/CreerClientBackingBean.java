@@ -32,10 +32,10 @@ public class CreerClientBackingBean implements Serializable {
         client = new Client();
     }
 
-    public Map<String, ModePaiement> getModesPaiement() {
-        Map<String, ModePaiement> map = new HashMap<String, ModePaiement>();
+    public Map<String, Long> getModesPaiement() {
+        Map<String, Long> map = new HashMap<String, Long>();
         for ( ModePaiement modePaiement : modePaiementDao.lister() ) {
-            map.put( modePaiement.getModePaiement(), modePaiement );
+            map.put( modePaiement.getModePaiement(), modePaiement.getId() );
         }
         return map;
     }

@@ -33,7 +33,6 @@ CREATE TABLE  bdd_lady.produit (
 ) 
 ENGINE = INNODB;
 
-
 CREATE TABLE  bdd_lady.client (
   id INT( 11 ) NOT NULL AUTO_INCREMENT ,  
   pseudo VARCHAR( 100 ) NOT NULL ,  
@@ -69,4 +68,13 @@ CREATE TABLE  bdd_lady.commande (
   CONSTRAINT fk_mode_expedition_commande FOREIGN KEY (modeExpedition) REFERENCES mode_expedition(id) ,
   CONSTRAINT fk_client_commande FOREIGN KEY (client) REFERENCES client(id)
 ) 
+ENGINE = INNODB;
+
+
+CREATE TABLE  bdd_lady.produits_commandes (
+  produit INT( 11 ) NOT NULL ,  
+  commande INT( 11 ) NOT NULL ,  
+  CONSTRAINT fk_produit_PC FOREIGN KEY (produit) REFERENCES produit(id),
+  CONSTRAINT fk_commande_PC FOREIGN KEY (commande) REFERENCES commande(id)
+)
 ENGINE = INNODB;

@@ -13,15 +13,18 @@ import com.lady.dao.ClientDao;
 import com.lady.dao.CommandeDao;
 import com.lady.dao.ModeExpeditionDao;
 import com.lady.dao.ModePaiementDao;
+import com.lady.dao.ProduitDao;
 import com.lady.entities.Client;
 import com.lady.entities.Commande;
 import com.lady.entities.ModeExpedition;
 import com.lady.entities.ModePaiement;
+import com.lady.entities.Produit;
 
 @ManagedBean( name = "creerCommandeBean" )
 @ViewScoped
 public class CreerCommandeBackingBean implements Serializable {
     private static final long   serialVersionUID = 1L;
+    private static final String SEPARATEUR       = " - ";
     private static final String URL_PAGE_SUJET   = "/listerCommandes.jsf?commandeId=";
 
     private Commande            commande;
@@ -30,6 +33,8 @@ public class CreerCommandeBackingBean implements Serializable {
     private CommandeDao         commandeDao;
     @EJB
     private ClientDao           clientDao;
+    @EJB
+    private ProduitDao          produitDao;
     @EJB
     private ModePaiementDao     modePaiementDao;
     @EJB
@@ -40,26 +45,34 @@ public class CreerCommandeBackingBean implements Serializable {
         commande = new Commande();
     }
 
-    public Map<String, ModePaiement> getModesPaiement() {
-        Map<String, ModePaiement> map = new HashMap<String, ModePaiement>();
+    public Map<String, Long> getModesPaiement() {
+        Map<String, Long> map = new HashMap<String, Long>();
         for ( ModePaiement modePaiement : modePaiementDao.lister() ) {
-            map.put( modePaiement.getModePaiement(), modePaiement );
+            map.put( modePaiement.getModePaiement(), modePaiement.getId() );
         }
         return map;
     }
 
-    public Map<String, Client> getClients() {
-        Map<String, Client> map = new HashMap<String, Client>();
+    public Map<String, Long> getClients() {
+        Map<String, Long> map = new HashMap<String, Long>();
         for ( Client client : clientDao.lister() ) {
-            map.put( client.getPseudo(), client );
+            map.put( client.getPseudo(), client.getId() );
         }
         return map;
     }
 
-    public Map<String, ModeExpedition> getModesExpedition() {
-        Map<String, ModeExpedition> map = new HashMap<String, ModeExpedition>();
+    public Map<String, Long> getProduits() {
+        Map<String, Long> map = new HashMap<String, Long>();
+        for ( Produit produit : produitDao.lister() ) {
+            map.put( produit.getNom() + SEPARATEUR + produit.getTaille(), produit.getId() );
+        }
+        return map;
+    }
+
+    public Map<String, Long> getModesExpedition() {
+        Map<String, Long> map = new HashMap<String, Long>();
         for ( ModeExpedition modeExpedition : modeExpeditionDao.lister() ) {
-            map.put( modeExpedition.getModeExpedition(), modeExpedition );
+            map.put( modeExpedition.getModeExpedition(), modeExpedition.getId() );
         }
         return map;
     }

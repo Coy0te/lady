@@ -20,6 +20,12 @@
 	   		</h:selectOneMenu>
 			<p:message id="clientMessage" for="client" errorClass="erreur" />
 			
+			<h:outputLabel for="produits">#{i18n.produitsCommande}</h:outputLabel>
+	  		<h:selectOneMenu id="produits" value="#{creerCommandeBean.commande.produits}">
+	   			<f:selectItems value="#{creerCommandeBean.produits}" />
+	   		</h:selectOneMenu>
+			<p:message id="produitsMessage" for="produits" errorClass="erreur" />
+			
 			<h:outputLabel for="prixCoutant">#{i18n.prixCoutantCommande} <span class="requis">*</span></h:outputLabel>
 			<h:inputText id="prixCoutant" value="#{creerCommandeBean.commande.prixCoutant}" />
 			<p:message id="prixCoutantMessage" for="prixCoutant" errorClass="erreur" />
@@ -53,7 +59,7 @@
 			<p:message id="modeExpeditionMessage" for="modeExpedition" errorClass="erreur" />
 			
 			<div class="rowButton">
-				<h:commandButton value="#{i18n.creerCommande}" type="submit" action="#{creerCommandeBean.creer()}" styleClass="btn btn-primary right-flt">
+				<h:commandButton value="#{i18n.boutonCreerCommande}" type="submit" action="#{creerCommandeBean.creer()}" styleClass="btn btn-primary right-flt">
 					<f:ajax execute="@form" render="@form" />
 				</h:commandButton>
 				<h:commandButton value="#{i18n.remettreAZero}" type="reset" styleClass="btn showMarkdownOverview" />
