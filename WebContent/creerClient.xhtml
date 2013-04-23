@@ -14,28 +14,47 @@
 		<h:form id="creationClientForm">
 			<h2>#{i18n.creerClient}</h2>
 			<h:outputLabel for="pseudo">#{i18n.pseudoClient} <span class="requis">*</span></h:outputLabel>
-			<h:inputText id="pseudo" value="#{creerClientBean.client.pseudo}" maxlength="100" />
+			<h:inputText id="pseudo" value="#{creerClientBean.client.pseudo}" maxlength="100">
+				<f:ajax event="blur" render="pseudoMessage" />
+			</h:inputText>
 			<p:message id="pseudoMessage" for="pseudo" errorClass="erreur" />
 			<h:outputLabel for="portable">#{i18n.portableClient} <span class="requis">*</span></h:outputLabel>
-			<h:inputText id="portable" value="#{creerClientBean.client.portable}" maxlength="100" />
+			<h:inputText id="portable" value="#{creerClientBean.client.portable}" maxlength="100">
+				<f:ajax event="blur" render="portableMessage" />
+			</h:inputText>
 			<p:message id="portableMessage" for="portable" errorClass="erreur" />
 			<h:outputLabel for="adresse">#{i18n.adresseClient} <span class="requis">*</span></h:outputLabel>
-			<h:inputText id="adresse" value="#{creerClientBean.client.adresse}" maxlength="100" />
+			<h:inputText id="adresse" value="#{creerClientBean.client.adresse}" maxlength="100">
+				<f:ajax event="blur" render="adresseMessage" />
+			</h:inputText>
 			<p:message id="adresseMessage" for="adresse" errorClass="erreur" />
 			
 			<h:outputLabel for="taille">#{i18n.tailleClient}</h:outputLabel>
-			<h:inputText id="taille" value="#{creerClientBean.client.taille}" />
+			<h:inputText id="taille" value="#{creerClientBean.client.taille}">
+				<f:ajax event="blur" render="tailleMessage" />
+			</h:inputText>
 			<p:message id="tailleMessage" for="taille" errorClass="erreur" />
 			<h:outputLabel for="poids">#{i18n.poidsClient}</h:outputLabel>
-			<h:inputText id="poids" value="#{creerClientBean.client.poids}" />
+			<h:inputText id="poids" value="#{creerClientBean.client.poids}">
+				<f:ajax event="blur" render="poidsMessage" />
+			</h:inputText>
 			<p:message id="poidsMessage" for="poids" errorClass="erreur" />
 			<h:outputLabel for="tourDePoitrine">#{i18n.tourDePoitrineClient}</h:outputLabel>
-			<h:inputText id="tourDePoitrine" value="#{creerClientBean.client.tourDePoitrine}" />
+			<h:inputText id="tourDePoitrine" value="#{creerClientBean.client.tourDePoitrine}">
+				<f:ajax event="blur" render="tourDePoitrineMessage" />
+			</h:inputText>
 			<p:message id="tourDePoitrineMessage" for="tourDePoitrine" errorClass="erreur" />
 			<h:outputLabel for="tourDeTaille">#{i18n.tourDeTailleClient}</h:outputLabel>
-			<h:inputText id="tourDeTaille" value="#{creerClientBean.client.tourDeTaille}" />
+			<h:inputText id="tourDeTaille" value="#{creerClientBean.client.tourDeTaille}">
+				<f:ajax event="blur" render="tourDeTailleMessage" />
+			</h:inputText>
 			<p:message id="tourDeTailleMessage" for="tourDeTaille" errorClass="erreur" />
-			
+			<h:outputLabel for="pointure">#{i18n.pointureClient}</h:outputLabel>
+			<h:inputText id="pointure" value="#{creerClientBean.client.pointure}">
+				<f:ajax event="blur" render="pointureMessage" />
+			</h:inputText>
+			<p:message id="pointureMessage" for="pointure" errorClass="erreur" />
+						
 			<h:outputLabel for="modePaiement">Mode de paiement</h:outputLabel>
 	  		<h:selectOneMenu id="modePaiement" value="#{creerClientBean.client.modePaiement}">
 	   			<f:selectItems value="#{creerClientBean.modesPaiement}" />
