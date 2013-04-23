@@ -14,49 +14,85 @@
 	<ui:define name="body">
 		<h:form id="creationCommandeForm">
 			<h2>#{i18n.creerCommande}</h2>
-			<h:outputLabel for="client">#{i18n.clientCommande} <span class="requis">*</span></h:outputLabel>
-	  		<h:selectOneMenu id="client" value="#{creerCommandeBean.commande.client}">
-	   			<f:selectItems value="#{creerCommandeBean.clients}" />
-	   		</h:selectOneMenu>
-			<p:message id="clientMessage" for="client" errorClass="erreur" />
+			<fieldset>
+				<legend>#{i18n.clientCommande}</legend>
+				<h:outputLabel for="client">#{i18n.clientCommande} <span class="requis">*</span></h:outputLabel>
+		  		<h:selectOneMenu id="client" value="#{creerCommandeBean.commande.client}">
+		   			<f:selectItems value="#{creerCommandeBean.clients}" />
+		   			<f:ajax event="change" render="clientMessage" />
+		   		</h:selectOneMenu>
+				<p:message id="clientMessage" for="client" errorClass="erreur" />
+			</fieldset>
 			
-			<h:outputLabel for="produits">#{i18n.produitsCommande}</h:outputLabel>
-	  		<h:selectOneMenu id="produits" value="#{creerCommandeBean.commande.produits}">
-	   			<f:selectItems value="#{creerCommandeBean.produits}" />
-	   		</h:selectOneMenu>
-			<p:message id="produitsMessage" for="produits" errorClass="erreur" />
+			<fieldset>
+				<legend>#{i18n.produitsCommande}</legend>
+				<h:outputLabel for="produits">#{i18n.produitsCommande}</h:outputLabel>
+		  		<h:selectOneMenu id="produits" value="#{creerCommandeBean.commande.produits}">
+		   			<f:selectItems value="#{creerCommandeBean.produits}" />
+		   			<f:ajax event="change" render="produitsMessage" />
+		   		</h:selectOneMenu>
+				<p:message id="produitsMessage" for="produits" errorClass="erreur" />
+			</fieldset>
 			
-			<h:outputLabel for="prixCoutant">#{i18n.prixCoutantCommande} <span class="requis">*</span></h:outputLabel>
-			<h:inputText id="prixCoutant" value="#{creerCommandeBean.commande.prixCoutant}" />
-			<p:message id="prixCoutantMessage" for="prixCoutant" errorClass="erreur" />
-			<h:outputLabel for="prixFacture">#{i18n.prixFactureCommande} <span class="requis">*</span></h:outputLabel>
-			<h:inputText id="prixFacture" value="#{creerCommandeBean.commande.prixFacture}" />
-			<p:message id="prixFactureMessage" for="prixFacture" errorClass="erreur" />
+			<fieldset>
+				<legend>#{i18n.facturationCommande}</legend>
+				<h:outputLabel for="prixCoutant">#{i18n.prixCoutantCommande} <span class="requis">*</span></h:outputLabel>
+				<h:inputText id="prixCoutant" value="#{creerCommandeBean.commande.prixCoutant}">
+					<f:ajax event="blur" render="prixCoutantMessage benef" />
+				</h:inputText>
+				<p:message id="prixCoutantMessage" for="prixCoutant" errorClass="erreur" />
+				<h:outputLabel for="prixFacture">#{i18n.prixFactureCommande} <span class="requis">*</span></h:outputLabel>
+				<h:inputText id="prixFacture" value="#{creerCommandeBean.commande.prixFacture}">
+					<f:ajax event="blur" render="prixFactureMessage benef" />
+				</h:inputText>
+				<p:message id="prixFactureMessage" for="prixFacture" errorClass="erreur" />
+				<hr/>
+				#{i18n.beneficesCommande} : 
+				<h:panelGroup id="benef">
+					<h:outputText rendered="#{creerCommandeBean.commande.prixFacture != null and creerCommandeBean.commande.prixCoutant != null}" 
+								  value="#{creerCommandeBean.commande.prixFacture - creerCommandeBean.commande.prixCoutant}"/>
+				</h:panelGroup>
+			</fieldset>
 			
-			<h:outputLabel for="modePaiement">#{i18n.modePaiementCommande}</h:outputLabel>
-	  		<h:selectOneMenu id="modePaiement" value="#{creerCommandeBean.commande.modePaiement}">
-	   			<f:selectItems value="#{creerCommandeBean.modesPaiement}" />
-	   		</h:selectOneMenu>
-			<p:message id="modePaiementMessage" for="modePaiement" errorClass="erreur" />
+			<fieldset>
+				<legend>#{i18n.paiementCommande}</legend>
+				<h:outputLabel for="modePaiement">#{i18n.modePaiementCommande}</h:outputLabel>
+		  		<h:selectOneMenu id="modePaiement" value="#{creerCommandeBean.commande.modePaiement}">
+		   			<f:selectItems value="#{creerCommandeBean.modesPaiement}" />
+		   			<f:ajax event="change" render="modePaiementMessage" />
+		   		</h:selectOneMenu>
+				<p:message id="modePaiementMessage" for="modePaiement" errorClass="erreur" />
+				<h:outputLabel for="datePaiement">#{i18n.datePaiementCommande}</h:outputLabel>
+				<h:inputText id="datePaiement" type="date" value="#{creerCommandeBean.commande.datePaiement}">
+					<f:ajax event="blur" render="datePaiementMessage" />
+				</h:inputText>
+				<p:message id="datePaiementMessage" for="datePaiement" errorClass="erreur" />
+			</fieldset>
 			
-			<h:outputLabel for="datePaiement">#{i18n.datePaiementCommande}</h:outputLabel>
-			<h:inputText id="datePaiement" type="date" value="#{creerCommandeBean.commande.datePaiement}" />
-			<p:message id="datePaiementMessage" for="datePaiement" errorClass="erreur" />
-			<h:outputLabel for="dateCommandeProduits">#{i18n.dateCommandeProduitsCommande}</h:outputLabel>
-			<h:inputText id="dateCommandeProduits" type="date" value="#{creerCommandeBean.commande.dateCommandeProduits}" />
-			<p:message id="dateCommandeProduitsMessage" for="dateCommandeProduits" errorClass="erreur" />
-			<h:outputLabel for="dateReceptionProduits">#{i18n.dateReceptionProduitsCommande}</h:outputLabel>
-			<h:inputText id="dateReceptionProduits" type="date" value="#{creerCommandeBean.commande.dateReceptionProduits}" />
-			<p:message id="dateReceptionProduitsMessage" for="dateReceptionProduits" errorClass="erreur" />
-			<h:outputLabel for="dateExpeditionProduits">#{i18n.dateExpeditionProduitsCommande}</h:outputLabel>
-			<h:inputText id="dateExpeditionProduits" type="date" value="#{creerCommandeBean.commande.dateExpeditionProduits}" />
-			<p:message id="dateExpeditionProduitsMessage" for="dateExpeditionProduits" errorClass="erreur" />
-			
-			<h:outputLabel for="modeExpedition">#{i18n.modeExpeditionCommande}</h:outputLabel>
-	  		<h:selectOneMenu id="modeExpedition" value="#{creerCommandeBean.commande.modeExpedition}">
-	   			<f:selectItems value="#{creerCommandeBean.modesExpedition}" />
-	   		</h:selectOneMenu>
-			<p:message id="modeExpeditionMessage" for="modeExpedition" errorClass="erreur" />
+			<fieldset>
+				<legend>#{i18n.tracageCommande}</legend>
+				<h:outputLabel for="dateCommandeProduits">#{i18n.dateCommandeProduitsCommande}</h:outputLabel>
+				<h:inputText id="dateCommandeProduits" type="date" value="#{creerCommandeBean.commande.dateCommandeProduits}">
+					<f:ajax event="blur" render="dateCommandeProduitsMessage" />
+				</h:inputText>
+				<p:message id="dateCommandeProduitsMessage" for="dateCommandeProduits" errorClass="erreur" />
+				<h:outputLabel for="dateReceptionProduits">#{i18n.dateReceptionProduitsCommande}</h:outputLabel>
+				<h:inputText id="dateReceptionProduits" type="date" value="#{creerCommandeBean.commande.dateReceptionProduits}">
+					<f:ajax event="blur" render="dateReceptionProduitsMessage" />
+				</h:inputText>
+				<p:message id="dateReceptionProduitsMessage" for="dateReceptionProduits" errorClass="erreur" />
+				<h:outputLabel for="dateExpeditionProduits">#{i18n.dateExpeditionProduitsCommande}</h:outputLabel>
+				<h:inputText id="dateExpeditionProduits" type="date" value="#{creerCommandeBean.commande.dateExpeditionProduits}">
+					<f:ajax event="blur" render="dateExpeditionProduitsMessage" />
+				</h:inputText>
+				<p:message id="dateExpeditionProduitsMessage" for="dateExpeditionProduits" errorClass="erreur" />
+				<h:outputLabel for="modeExpedition">#{i18n.modeExpeditionCommande}</h:outputLabel>
+		  		<h:selectOneMenu id="modeExpedition" value="#{creerCommandeBean.commande.modeExpedition}">
+		   			<f:selectItems value="#{creerCommandeBean.modesExpedition}" />
+		   			<f:ajax event="change" render="modeExpeditionMessage" />
+		   		</h:selectOneMenu>
+				<p:message id="modeExpeditionMessage" for="modeExpedition" errorClass="erreur" />
+			</fieldset>
 			
 			<div class="rowButton">
 				<h:commandButton value="#{i18n.boutonCreerCommande}" type="submit" action="#{creerCommandeBean.creer()}" styleClass="btn btn-primary right-flt">
