@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+	<div id="mainHeader">
+		<div id="headerTop">
+			<div id="mainMenu" class="largeurLimite">
+				<div id="menuUp">
+					<div class="UpMob">
+						<h:link id="logo" outcome="/accueil">
+							Lady 猪猪
+						</h:link>
+					</div>
+					<span class="sep"></span>
+				</div>
+				<div id="menuDown">
+					<div class="contentDown">
+						<ul class="menu">
+							<li class="sep"></li>
+							<li><h:link value="Clients" outcome="/clients" /></li>
+							<li class="sep"></li>
+							<li><h:link value="Commandes" outcome="/commandes" /></li>
+							<li class="sep"></li>
+							<li><h:link value="Produits" outcome="/produits" /></li>
+							<li class="sep"></li>
+							<li><h:link value="Statistiques" outcome="/statistiques" /></li>
+							<li class="sep"></li>
+						</ul>
+						<div id="navmenuRight">
+							<h:form styleClass="searchForm">
+								<h:inputText placeholder="Recherche" name="q"/>
+								<h:commandButton action="recherche"/>
+							</h:form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="headGradient">
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+		<div id="headerMiddle">
+			<div class="largeurLimite">
+				<h:link><div class="titlePicture #{logoPage}"></div></h:link>
+				<h1>
+					<h:link>#{titrePage}</h:link>
+				</h1>
+				<p>#{descriptionPage}</p>
+			</div>
+		</div>
+	</div>
+</ui:composition>
