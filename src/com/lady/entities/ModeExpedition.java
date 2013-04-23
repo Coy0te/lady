@@ -8,12 +8,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table( name = "mode_paiement" )
-public class ModePaiement {
+public class ModeExpedition {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Long   id;
-    private String modePaiement;
+    private String modeExpedition;
 
     public Long getId() {
         return id;
@@ -23,11 +23,11 @@ public class ModePaiement {
         this.id = id;
     }
 
-    public String getModePaiement() {
-        return modePaiement;
+    public String getModeExpedition() {
+        return modeExpedition;
     }
 
-    public void setModePaiement( String modePaiement ) {
-        this.modePaiement = modePaiement;
+    public void setModeExpedition( String modeExpedition ) {
+        this.modeExpedition = modeExpedition;
     }
 }

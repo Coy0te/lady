@@ -1,16 +1,32 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:p="http://primefaces.org/ui"
 				template="/WEB-INF/templates/template_base.xhtml">
 	<ui:define name="title">
-		Produits
+		#{i18n.produits}
 	</ui:define>
 	<ui:define name="header">
 		<ui:include src="/WEB-INF/snippets/header/inc_header.xhtml">
-			<ui:param name="titrePage" value="Produits"/>
-			<ui:param name="descriptionPage" value="Gestion des produits"/>
+			<ui:param name="titrePage" value="#{i18n.produitsTitre}"/>
+			<ui:param name="descriptionPage" value="#{i18n.produitsSousTitre}"/>
 			<ui:param name="logoPage" value="malette"/>
 		</ui:include>
 	</ui:define>
 	<ui:define name="body">
-		TODO.
+		<h:form id="creationProduitForm">
+			<h2>#{i18n.creerProduit}</h2>
+			<h:outputLabel for="nom">#{i18n.nomProduit}</h:outputLabel>
+			<h:inputText id="nom" value="#{creerCommandeBean.produit.nom}" />
+			<p:message id="nomMessage" for="nom" errorClass="erreur" />
+			<h:outputLabel for="taille">#{i18n.tailleProduit}</h:outputLabel>
+			<h:inputText id="taille" value="#{creerCommandeBean.produit.taille}" />
+			<p:message id="tailleMessage" for="taille" errorClass="erreur" />
+			
+			<div class="rowButton">
+				<h:commandButton value="#{i18n.creerProduit}" type="submit" action="#{creerProduitBean.creer()}" styleClass="btn btn-primary right-flt">
+					<f:ajax execute="@form" render="@form" />
+				</h:commandButton>
+				<h:commandButton value="#{i18n.remettreAZero}" type="reset" styleClass="btn showMarkdownOverview" />
+			</div>
+		</h:form>
 	</ui:define>
 </ui:composition>

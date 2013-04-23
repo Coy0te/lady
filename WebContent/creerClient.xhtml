@@ -2,12 +2,12 @@
 				xmlns:p="http://primefaces.org/ui"
 				template="/WEB-INF/templates/template_base.xhtml">
 	<ui:define name="title">
-		Clients
+		#{i18n.clients}
 	</ui:define>
 	<ui:define name="header">
 		<ui:include src="/WEB-INF/snippets/header/inc_header.xhtml">
-			<ui:param name="titrePage" value="Clients"/>
-			<ui:param name="descriptionPage" value="Gestion des clients"/>
+			<ui:param name="titrePage" value="#{i18n.clientsTitre}"/>
+			<ui:param name="descriptionPage" value="#{i18n.clientsSousTitre}"/>
 		</ui:include>
 	</ui:define>
 	<ui:define name="body">
@@ -35,9 +35,6 @@
 			<h:outputLabel for="tourDeTaille">#{i18n.tourDeTailleClient}</h:outputLabel>
 			<h:inputText id="tourDeTaille" value="#{creerClientBean.client.tourDeTaille}" />
 			<p:message id="tourDeTailleMessage" for="tourDeTaille" errorClass="erreur" />
-			<h:outputLabel for="pointure">#{i18n.pointureClient}</h:outputLabel>
-			<h:inputText id="pointure" value="#{creerClientBean.client.pointure}" />
-			<p:message id="pointureMessage" for="pointure" errorClass="erreur" />
 			
 			<h:outputLabel for="modePaiement">Mode de paiement</h:outputLabel>
 	  		<h:selectOneMenu id="modePaiement" value="#{creerClientBean.client.modePaiement}">
@@ -46,10 +43,10 @@
 			<p:message id="modePaiementMessage" for="modePaiement" errorClass="erreur" />
 			
 			<div class="rowButton">
-				<h:commandButton value="Envoyer" type="submit" action="#{creerClientBean.creer()}" styleClass="btn btn-primary right-flt">
+				<h:commandButton value="#{i18n.creerClient}" type="submit" action="#{creerClientBean.creer()}" styleClass="btn btn-primary right-flt">
 					<f:ajax execute="@form" render="@form" />
 				</h:commandButton>
-				<h:commandButton value="Remettre à zéro" type="reset" styleClass="btn showMarkdownOverview" />
+				<h:commandButton value="#{i18n.remettreAZero}" type="reset" styleClass="btn showMarkdownOverview" />
 			</div>
 		</h:form>
 	</ui:define>

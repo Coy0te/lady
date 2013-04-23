@@ -12,7 +12,11 @@ CREATE TABLE  bdd_lady.mode_paiement (
   PRIMARY KEY ( id )
 ) 
 ENGINE = INNODB;
-
+INSERT INTO mode_paiement (modePaiement)  VALUES( "农行 (Nong Hang)" );
+INSERT INTO mode_paiement (modePaiement)  VALUES( "工行 (Gong Hang)" );
+INSERT INTO mode_paiement (modePaiement)  VALUES( "建行 (Jian Hang)" );
+INSERT INTO mode_paiement (modePaiement)  VALUES( "中信 (Zhong Xin)" );
+INSERT INTO mode_paiement (modePaiement)  VALUES( "支付宝 (Zhi Fu Bao)" );
 
 CREATE TABLE  bdd_lady.produit (
   id INT( 11 ) NOT NULL AUTO_INCREMENT ,  

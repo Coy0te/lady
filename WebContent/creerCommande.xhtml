@@ -1,16 +1,63 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:p="http://primefaces.org/ui"
 				template="/WEB-INF/templates/template_base.xhtml">
 	<ui:define name="title">
-		Commandes
+		#{i18n.commandes}
 	</ui:define>
 	<ui:define name="header">
 		<ui:include src="/WEB-INF/snippets/header/inc_header.xhtml">
-			<ui:param name="titrePage" value="Commandes"/>
-			<ui:param name="descriptionPage" value="Gestion des commandes"/>
+			<ui:param name="titrePage" value="#{i18n.commandesTitre}"/>
+			<ui:param name="descriptionPage" value="#{i18n.commandesSousTitre}"/>
 			<ui:param name="logoPage" value="shop"/>
 		</ui:include>
 	</ui:define>
 	<ui:define name="body">
-		TODO.
+		<h:form id="creationCommandeForm">
+			<h2>#{i18n.creerCommande}</h2>
+			<h:outputLabel for="client">#{i18n.clientCommande} <span class="requis">*</span></h:outputLabel>
+	  		<h:selectOneMenu id="client" value="#{creerCommandeBean.commande.client}">
+	   			<f:selectItems value="#{creerCommandeBean.clients}" />
+	   		</h:selectOneMenu>
+			<p:message id="clientMessage" for="client" errorClass="erreur" />
+			
+			<h:outputLabel for="prixCoutant">#{i18n.prixCoutantCommande} <span class="requis">*</span></h:outputLabel>
+			<h:inputText id="prixCoutant" value="#{creerCommandeBean.commande.prixCoutant}" />
+			<p:message id="prixCoutantMessage" for="prixCoutant" errorClass="erreur" />
+			<h:outputLabel for="prixFacture">#{i18n.prixFactureCommande} <span class="requis">*</span></h:outputLabel>
+			<h:inputText id="prixFacture" value="#{creerCommandeBean.commande.prixFacture}" />
+			<p:message id="prixFactureMessage" for="prixFacture" errorClass="erreur" />
+			
+			<h:outputLabel for="modePaiement">#{i18n.modePaiementCommande}</h:outputLabel>
+	  		<h:selectOneMenu id="modePaiement" value="#{creerCommandeBean.commande.modePaiement}">
+	   			<f:selectItems value="#{creerCommandeBean.modesPaiement}" />
+	   		</h:selectOneMenu>
+			<p:message id="modePaiementMessage" for="modePaiement" errorClass="erreur" />
+			
+			<h:outputLabel for="datePaiement">#{i18n.datePaiementCommande}</h:outputLabel>
+			<h:inputText id="datePaiement" type="date" value="#{creerCommandeBean.commande.datePaiement}" />
+			<p:message id="datePaiementMessage" for="datePaiement" errorClass="erreur" />
+			<h:outputLabel for="dateCommandeProduits">#{i18n.dateCommandeProduitsCommande}</h:outputLabel>
+			<h:inputText id="dateCommandeProduits" type="date" value="#{creerCommandeBean.commande.dateCommandeProduits}" />
+			<p:message id="dateCommandeProduitsMessage" for="dateCommandeProduits" errorClass="erreur" />
+			<h:outputLabel for="dateReceptionProduits">#{i18n.dateReceptionProduitsCommande}</h:outputLabel>
+			<h:inputText id="dateReceptionProduits" type="date" value="#{creerCommandeBean.commande.dateReceptionProduits}" />
+			<p:message id="dateReceptionProduitsMessage" for="dateReceptionProduits" errorClass="erreur" />
+			<h:outputLabel for="dateExpeditionProduits">#{i18n.dateExpeditionProduitsCommande}</h:outputLabel>
+			<h:inputText id="dateExpeditionProduits" type="date" value="#{creerCommandeBean.commande.dateExpeditionProduits}" />
+			<p:message id="dateExpeditionProduitsMessage" for="dateExpeditionProduits" errorClass="erreur" />
+			
+			<h:outputLabel for="modeExpedition">#{i18n.modeExpeditionCommande}</h:outputLabel>
+	  		<h:selectOneMenu id="modeExpedition" value="#{creerCommandeBean.commande.modeExpedition}">
+	   			<f:selectItems value="#{creerCommandeBean.modesExpedition}" />
+	   		</h:selectOneMenu>
+			<p:message id="modeExpeditionMessage" for="modeExpedition" errorClass="erreur" />
+			
+			<div class="rowButton">
+				<h:commandButton value="#{i18n.creerCommande}" type="submit" action="#{creerCommandeBean.creer()}" styleClass="btn btn-primary right-flt">
+					<f:ajax execute="@form" render="@form" />
+				</h:commandButton>
+				<h:commandButton value="#{i18n.remettreAZero}" type="reset" styleClass="btn showMarkdownOverview" />
+			</div>
+		</h:form>
 	</ui:define>
 </ui:composition>
