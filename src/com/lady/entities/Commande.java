@@ -25,8 +25,8 @@ public class Commande {
     private Client        client;
     @OneToMany( fetch = FetchType.LAZY, mappedBy = "commande" )
     private List<Produit> produits;
-    private Double        prixCoutant;
-    private Double        prixFacture;
+    private Integer       prixCoutant;
+    private Integer       prixFacture;
     private String        modePaiement;
     private DateTime      datePaiement;
     private DateTime      dateCommandeProduits;
@@ -58,19 +58,19 @@ public class Commande {
         this.produits = produits;
     }
 
-    public Double getPrixCoutant() {
+    public Integer getPrixCoutant() {
         return prixCoutant;
     }
 
-    public void setPrixCoutant( Double prixCoutant ) {
+    public void setPrixCoutant( Integer prixCoutant ) {
         this.prixCoutant = prixCoutant;
     }
 
-    public Double getPrixFacture() {
+    public Integer getPrixFacture() {
         return prixFacture;
     }
 
-    public void setPrixFacture( Double prixFacture ) {
+    public void setPrixFacture( Integer prixFacture ) {
         this.prixFacture = prixFacture;
     }
 

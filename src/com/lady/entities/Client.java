@@ -15,18 +15,18 @@ public class Client {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private Long    id;
-    private String  pseudo;
-    private String  portable;
-    private String  adresse;
-    private Integer taille;        // cm
-    private Integer poids;         // jin
-    private Integer tourDePoitrine; // XiongWei, cm
-    private Integer tourDeTaille;  // YaoWei, cm
-    private Integer pointure;
+    private Long         id;
+    private String       pseudo;
+    private String       portable;
+    private String       adresse;
+    private Integer      taille;        // cm
+    private Integer      poids;         // jin
+    private Integer      tourDePoitrine; // XiongWei, cm
+    private Integer      tourDeTaille;  // YaoWei, cm
+    private Integer      pointure;
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn( name = "modePaiement" )
-    private String  modePaiement;  // nonghang, gonghang, jianhang, zhongxin, zhifubao
+    private ModePaiement modePaiement;  // nonghang, gonghang, jianhang, zhongxin, zhifubao
 
     public Long getId() {
         return id;
@@ -60,11 +60,11 @@ public class Client {
         this.adresse = adresse;
     }
 
-    public String getModePaiement() {
+    public ModePaiement getModePaiement() {
         return modePaiement;
     }
 
-    public void setModePaiement( String modePaiement ) {
+    public void setModePaiement( ModePaiement modePaiement ) {
         this.modePaiement = modePaiement;
     }
 
