@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table( name = "client" )
@@ -16,8 +17,11 @@ public class Client {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Long         id;
+    @NotNull( message = "{pseudoClientRequis}" )
     private String       pseudo;
+    @NotNull( message = "{portableClientRequis}" )
     private String       portable;
+    @NotNull( message = "{adresseClientRequis}" )
     private String       adresse;
     private Integer      taille;        // cm
     private Integer      poids;         // jin

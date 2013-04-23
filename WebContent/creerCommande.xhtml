@@ -15,7 +15,7 @@
 		<h:form id="creationCommandeForm">
 			<h2>#{i18n.creerCommande}</h2>
 			<fieldset>
-				<legend>#{i18n.clientCommande}</legend>
+				<legend>#{i18n.clientCommande} <span class="requis">*</span></legend>
 				<h:outputLabel for="client">#{i18n.clientCommande} <span class="requis">*</span></h:outputLabel>
 		  		<h:selectOneMenu id="client" value="#{creerCommandeBean.commande.client}">
 		   			<f:selectItems value="#{creerCommandeBean.clients}" />
@@ -25,8 +25,8 @@
 			</fieldset>
 			
 			<fieldset>
-				<legend>#{i18n.produitsCommande}</legend>
-				<h:outputLabel for="produits">#{i18n.produitsCommande}</h:outputLabel>
+				<legend>#{i18n.produitsCommande} <span class="requis">*</span></legend>
+				<h:outputLabel for="produits">#{i18n.produitsCommande} <span class="requis">*</span></h:outputLabel>
 		  		<h:selectOneMenu id="produits" value="#{creerCommandeBean.commande.produits}">
 		   			<f:selectItems value="#{creerCommandeBean.produits}" />
 		   			<f:ajax event="change" render="produitsMessage" />
@@ -35,7 +35,7 @@
 			</fieldset>
 			
 			<fieldset>
-				<legend>#{i18n.facturationCommande}</legend>
+				<legend>#{i18n.facturationCommande} <span class="requis">*</span></legend>
 				<h:outputLabel for="prixCoutant">#{i18n.prixCoutantCommande} <span class="requis">*</span></h:outputLabel>
 				<h:inputText id="prixCoutant" value="#{creerCommandeBean.commande.prixCoutant}">
 					<f:ajax event="blur" render="prixCoutantMessage benef" />
@@ -56,14 +56,14 @@
 			</fieldset>
 			
 			<fieldset>
-				<legend>#{i18n.paiementCommande}</legend>
-				<h:outputLabel for="modePaiement">#{i18n.modePaiementCommande}</h:outputLabel>
+				<legend>#{i18n.paiementCommande} <span class="requis">*</span></legend>
+				<h:outputLabel for="modePaiement">#{i18n.modePaiementCommande} <span class="requis">*</span></h:outputLabel>
 		  		<h:selectOneMenu id="modePaiement" value="#{creerCommandeBean.commande.modePaiement}">
 		   			<f:selectItems value="#{creerCommandeBean.modesPaiement}" />
 		   			<f:ajax event="change" render="modePaiementMessage" />
 		   		</h:selectOneMenu>
 				<p:message id="modePaiementMessage" for="modePaiement" errorClass="erreur" />
-				<h:outputLabel for="datePaiement">#{i18n.datePaiementCommande}</h:outputLabel>
+				<h:outputLabel for="datePaiement">#{i18n.datePaiementCommande} <span class="requis">*</span></h:outputLabel>
 				<h:inputText id="datePaiement" type="date" value="#{creerCommandeBean.commande.datePaiement}">
 					<f:ajax event="blur" render="datePaiementMessage" />
 				</h:inputText>
