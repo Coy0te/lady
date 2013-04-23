@@ -1,7 +1,8 @@
 package com.lady.beans;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -31,8 +32,12 @@ public class CreerClientBackingBean implements Serializable {
         client = new Client();
     }
 
-    public List<ModePaiement> getModesPaiement() {
-        return modePaiementDao.lister();
+    public Map<String, ModePaiement> getModesPaiement() {
+        Map<String, ModePaiement> map = new HashMap<String, ModePaiement>();
+        for ( ModePaiement modePaiement : modePaiementDao.lister() ) {
+            map.put( modePaiement.getModePaiement(), modePaiement );
+        }
+        return map;
     }
 
     public void creer() {

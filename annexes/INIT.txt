@@ -1,3 +1,8 @@
+DROP DATABASE IF EXISTS bdd_lady;
+
+CREATE DATABASE bdd_lady CHARACTER SET 'utf8';
+use bdd_lady;
+
 CREATE TABLE  bdd_lady.mode_expedition (
   id INT( 11 ) NOT NULL AUTO_INCREMENT ,  
   modeExpedition VARCHAR( 100 ) NOT NULL ,
