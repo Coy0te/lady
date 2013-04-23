@@ -14,11 +14,41 @@
 					<div class="contentDown">
 						<ul class="menu">
 							<li class="sep"></li>
-							<li><h:link value="#{i18n.clients}" outcome="/clients" /></li>
+							<li class="deroulant">
+								<h:link value="#{i18n.clients}" />
+								<ul>
+									<li>
+										<h:link outcome="/creerClient">#{i18n.creerClient}</h:link>
+									</li>
+									<li>
+										<h:link outcome="/listerClients">#{i18n.listerClients}</h:link>
+									</li>
+								</ul>
+							</li>
 							<li class="sep"></li>
-							<li><h:link value="#{i18n.commandes}" outcome="/commandes" /></li>
+							<li class="deroulant">
+								<h:link value="#{i18n.commandes}" />
+								<ul>
+									<li>
+										<h:link outcome="/creerCommande">#{i18n.creerCommande}</h:link>
+									</li>
+									<li>
+										<h:link outcome="/listerCommandes">#{i18n.listerCommandes}</h:link>
+									</li>
+								</ul>
+							</li>
 							<li class="sep"></li>
-							<li><h:link value="#{i18n.produits}" outcome="/produits" /></li>
+							<li class="deroulant">
+								<h:link value="#{i18n.produits}" />
+								<ul>
+									<li>
+										<h:link outcome="/creerProduit">#{i18n.creerProduit}</h:link>
+									</li>
+									<li>
+										<h:link outcome="/listerProduits">#{i18n.listerProduits}</h:link>
+									</li>
+								</ul>
+							</li>
 							<li class="sep"></li>
 							<li><h:link value="#{i18n.statistiques}" outcome="/statistiques" /></li>
 							<li class="sep"></li>

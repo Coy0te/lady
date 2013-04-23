@@ -119,6 +119,42 @@ ul.list li.read div.row:hover div.cell{
 	margin-top: 9px;
 }
 
+#mainHeader li.deroulant{
+	position: relative;
+}
+#mainHeader li.deroulant ul {
+	display: none;
+	z-index: 1000;
+	position: absolute;
+	top: 40px;
+	left: 0;
+	width: 180px;
+	border-color: #03638b;
+	border-style: solid;
+	border-width: 0 1px 1px 1px;
+	background-color: #002d40;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.75);
+	border-bottom-left-radius: 3px;
+}
+#mainHeader li.deroulant:hover ul {
+	display: block;
+}
+#mainHeader li.deroulant ul li {
+	display: block;
+	position: relative;
+}
+#mainHeader li.deroulant ul li>a {
+	display: block;
+	padding: 0 8px 0 8px;
+	height: 34px;
+	width: 160px;
+	border-top: solid 1px #001d2e;
+	box-shadow: 0 1px 0 #004c60 inset;
+	line-height: 24px;
+	vertical-align: middle;
+	text-align: left;
+}
+
 #mainMenu .login {
 	display: inline-block;
 	padding: 10px 0 13px 0;
@@ -276,7 +312,7 @@ ul.list li.read div.row:hover div.cell{
 	background-position: -324px -6px;
 }
 #mainHeader #headerMiddle div.shop {
-	background-position: -651px -6px;
+	background-position: -651px -7px;
 }
 #mainHeader #headerMiddle div.forumSdz {
 	background-position: 0px -6px;
@@ -284,6 +320,13 @@ ul.list li.read div.row:hover div.cell{
 #mainHeader #headerMiddle div.noway {
 	background-position: -568px -6px;
 }
+#mainHeader #headerMiddle div.malette {
+	background-position: -822px -8px;
+}
+#mainHeader #headerMiddle div.lettre {
+	background-position: -163px -7px;
+}
+
 #mainHeader #headerMiddle h1{
 	margin: 0;
 	line-height: 36px;

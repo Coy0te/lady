@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:p="http://primefaces.org/ui"
+				template="/WEB-INF/templates/template_base.xhtml">
+	<ui:define name="title">
+		Clients
+	</ui:define>
+	<ui:define name="header">
+		<ui:include src="/WEB-INF/snippets/header/inc_header.xhtml">
+			<ui:param name="titrePage" value="Clients"/>
+			<ui:param name="descriptionPage" value="Gestion des clients"/>
+		</ui:include>
+	</ui:define>
+	<ui:define name="body">
+		<h:form id="creationClientForm">
+			<h2>#{i18n.creerClient}</h2>
+			<h:outputLabel for="pseudo">#{i18n.pseudoClient} <span class="requis">*</span></h:outputLabel>
+			<h:inputText id="pseudo" value="#{creerClientBean.client.pseudo}" maxlength="100" />
+			<p:message id="pseudoMessage" for="pseudo" errorClass="erreur" />
+			<h:outputLabel for="portable">#{i18n.portableClient} <span class="requis">*</span></h:outputLabel>
+			<h:inputText id="portable" value="#{creerClientBean.client.portable}" maxlength="100" />
+			<p:message id="portableMessage" for="portable" errorClass="erreur" />
+			<h:outputLabel for="adresse">#{i18n.adresseClient} <span class="requis">*</span></h:outputLabel>
+			<h:inputText id="adresse" value="#{creerClientBean.client.adresse}" maxlength="100" />
+			<p:message id="adresseMessage" for="adresse" errorClass="erreur" />
+			
+			<h:outputLabel for="taille">#{i18n.tailleClient}</h:outputLabel>
+			<h:inputText id="taille" value="#{creerClientBean.client.taille}" />
+			<p:message id="tailleMessage" for="taille" errorClass="erreur" />
+			<h:outputLabel for="poids">#{i18n.poidsClient}</h:outputLabel>
+			<h:inputText id="poids" value="#{creerClientBean.client.poids}" />
+			<p:message id="poidsMessage" for="poids" errorClass="erreur" />
+			<h:outputLabel for="tourDePoitrine">#{i18n.tourDePoitrineClient}</h:outputLabel>
+			<h:inputText id="tourDePoitrine" value="#{creerClientBean.client.tourDePoitrine}" />
+			<p:message id="tourDePoitrineMessage" for="tourDePoitrine" errorClass="erreur" />
+			<h:outputLabel for="tourDeTaille">#{i18n.tourDeTailleClient}</h:outputLabel>
+			<h:inputText id="tourDeTaille" value="#{creerClientBean.client.tourDeTaille}" />
+			<p:message id="tourDeTailleMessage" for="tourDeTaille" errorClass="erreur" />
+			<h:outputLabel for="pointure">#{i18n.pointureClient}</h:outputLabel>
+			<h:inputText id="pointure" value="#{creerClientBean.client.pointure}" />
+			<p:message id="pointureMessage" for="pointure" errorClass="erreur" />
+			
+			<h:outputLabel for="modePaiement">Mode de paiement</h:outputLabel>
+	  		<h:selectOneMenu id="modePaiement" value="#{creerClientBean.client.modePaiement}">
+	   			<f:selectItems value="#{creerClientBean.modesPaiement}" />
+	   		</h:selectOneMenu>
+			<p:message id="modePaiementMessage" for="modePaiement" errorClass="erreur" />
+			
+			<div class="rowButton">
+				<h:commandButton value="Envoyer" type="submit" action="#{creerClientBean.creer()}" styleClass="btn btn-primary right-flt">
+					<f:ajax execute="@form" render="@form" />
+				</h:commandButton>
+				<h:commandButton value="Remettre à zéro" type="reset" styleClass="btn showMarkdownOverview" />
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
