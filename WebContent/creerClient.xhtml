@@ -65,7 +65,7 @@
 				<legend>#{i18n.infosPaiementClient}</legend>		
 				<h:outputLabel for="modePaiement">#{i18n.infosPaiementClient}</h:outputLabel>
 				<h:selectOneMenu id="modePaiement" value="#{creerClientBean.client.modePaiement}" converter="omnifaces.SelectItemsConverter">
-		            <f:selectItems value="#{creerClientBean.modesPaiement}" />
+		            <f:selectItems value="#{creerClientBean.modesPaiement}" var="item" itemLabel="#{item.modePaiement}" />
 		            <f:ajax render="modePaiementMessage" />
 		        </h:selectOneMenu>
 				   		

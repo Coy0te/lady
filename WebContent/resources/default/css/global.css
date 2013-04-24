@@ -127,6 +127,9 @@ ul.list li.read div.row:hover div.cell{
 #mainHeader li.deroulant{
 	position: relative;
 }
+#mainHeader li.deroulant>a{
+	cursor: default;
+}
 #mainHeader li.deroulant ul {
 	display: none;
 	z-index: 1000;

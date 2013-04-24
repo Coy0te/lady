@@ -3,8 +3,7 @@ package com.lady.beans;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -25,6 +24,7 @@ public class CreerClientBackingBean implements Serializable {
     private static final String URL_PAGE_SUJET   = "/listerClients.jsf?clientId=";
 
     private Client              client;
+    private List<ModePaiement>  modesPaiement;
 
     @EJB
     private ClientDao           clientDao;
@@ -34,21 +34,19 @@ public class CreerClientBackingBean implements Serializable {
     @PostConstruct
     public void init() {
         client = new Client();
+        modesPaiement = modePaiementDao.lister();
     }
 
-    public Map<String, ModePaiement> getModesPaiement() {
-        Map<String, ModePaiement> map = new HashMap<String, ModePaiement>();
-        for ( ModePaiement modePaiement : modePaiementDao.lister() ) {
-            map.put( modePaiement.getModePaiement(), modePaiement );
-        }
-        return map;
+    public List<ModePaiement> getModesPaiement() {
+        return modesPaiement;
     }
 
     public void creer() throws IOException {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         initialiserDateCreation();
         clientDao.creer( client );
-        externalContext.redirect( externalContext.getRequestContextPath() + URL_PAGE_SUJET + String.valueOf( client.getId() ) );
+        externalContext.redirect( externalContext.getRequestContextPath() + URL_PAGE_SUJET
+                + String.valueOf( client.getId() ) );
     }
 
     private void initialiserDateCreation() {
