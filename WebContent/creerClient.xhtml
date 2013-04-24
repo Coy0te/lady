@@ -66,6 +66,7 @@
 				<h:outputLabel for="modePaiement">#{i18n.infosPaiementClient}</h:outputLabel>
 		  		<h:selectOneMenu id="modePaiement" value="#{creerClientBean.client.modePaiement}">
 		   			<f:selectItems value="#{creerClientBean.modesPaiement}" />
+		   			<f:converter binding="#{modePaiementConverter}" />
 		   		</h:selectOneMenu>
 				<p:message id="modePaiementMessage" for="modePaiement" errorClass="erreur" />
 			</fieldset>

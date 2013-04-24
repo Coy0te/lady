@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table( name = "client" )
@@ -17,9 +18,10 @@ public class Client {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Long         id;
-    @NotNull( message = "{pseudoClientRequis}" )
+    @NotNull( message = "{pseudoClient.requis}" )
     private String       pseudo;
-    @NotNull( message = "{portableClientRequis}" )
+    @NotNull( message = "{portableClient.requis}" )
+    @Pattern( regexp = "^\\d+$", message = "{portableClient.format}" )
     private String       portable;
     @NotNull( message = "{adresseClientRequis}" )
     private String       adresse;
