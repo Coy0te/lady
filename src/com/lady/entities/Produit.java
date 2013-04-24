@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -23,7 +24,12 @@ public class Produit {
     private String    nom;
     private String    taille;
     @ManyToOne( fetch = FetchType.LAZY )
-    @JoinTable( name = "produits_commande" )
+    @JoinTable(
+            name = "produits_commandes",
+            joinColumns =
+            @JoinColumn( name = "produit", referencedColumnName = "id" ),
+            inverseJoinColumns =
+            @JoinColumn( name = "commande", referencedColumnName = "id" ) )
     private Commande  commande;
     private Timestamp dateCreation;
 

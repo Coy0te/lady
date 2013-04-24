@@ -28,9 +28,9 @@
 			<fieldset>
 				<legend>#{i18n.produitsCommande} <span class="requis">*</span></legend>
 				<h:outputLabel for="produits">#{i18n.produitsCommande} <span class="requis">*</span></h:outputLabel>
-				<h:selectOneMenu id="produits" value="#{creerCommandeBean.commande.produits}" converter="omnifaces.SelectItemsConverter">
+				<h:selectOneMenu id="produits" value="#{creerCommandeBean.commande.produit}" converter="omnifaces.SelectItemsConverter">
 					<f:selectItem itemLabel="#{i18n.choixItem}" noSelectionOption="true" />
-		            <f:selectItems value="#{creerCommandeBean.produits}" var="item" itemLabel="#{item.nom}" />
+		            <f:selectItems value="#{creerCommandeBean.produits}" var="item" itemLabel="#{item.nom} - #{item.taille}" />
 		            <f:ajax event="change" render="produitsMessage" />
 		        </h:selectOneMenu>
 				<p:message id="produitsMessage" for="produits" errorClass="erreur" />
@@ -69,6 +69,7 @@
 				<p:message id="modePaiementMessage" for="modePaiement" errorClass="erreur" />
 				<h:outputLabel for="datePaiement">#{i18n.datePaiementCommande} <span class="requis">*</span></h:outputLabel>
 				<h:inputText id="datePaiement" type="date" value="#{creerCommandeBean.commande.datePaiement}">
+					<f:convertDateTime pattern="mm/dd/yyyy"/>
 					<f:ajax event="blur" render="datePaiementMessage" />
 				</h:inputText>
 				<p:message id="datePaiementMessage" for="datePaiement" errorClass="erreur" />
