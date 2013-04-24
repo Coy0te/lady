@@ -12,53 +12,53 @@
 	</ui:define>
 	<ui:define name="body">
 		<h:form id="creationClientForm">
-			<h2>#{i18n.creerClient}</h2>
+			<h2>#{i18n.creerClient}</h2>			
 			<fieldset>
 				<legend>#{i18n.infosMinimalesClient} <span class="requis">*</span></legend>
 				<h:outputLabel for="pseudo">#{i18n.pseudoClient} <span class="requis">*</span></h:outputLabel>
 				<h:inputText id="pseudo" value="#{creerClientBean.client.pseudo}" maxlength="100">
-					<f:ajax event="blur" render="pseudoMessage" />
+					<f:ajax event="blur" render="pseudoValidationPic" />
 				</h:inputText>
-				<p:message id="pseudoMessage" for="pseudo" errorClass="erreur" />
+				<h:graphicImage id="pseudoValidationPic" library="default" styleClass="validationPic" name="css/images/#{facesContext.validationFailed ? 'ko' : 'blank'}.png" />
 				<h:outputLabel for="portable">#{i18n.portableClient} <span class="requis">*</span></h:outputLabel>
 				<h:inputText id="portable" value="#{creerClientBean.client.portable}" maxlength="100">
-					<f:ajax event="blur" render="portableMessage" />
+					<f:ajax event="blur" render="portableValidationPic" />
 				</h:inputText>
-				<p:message id="portableMessage" for="portable" errorClass="erreur" />
+				<h:graphicImage id="portableValidationPic" library="default" styleClass="validationPic" name="css/images/#{facesContext.validationFailed ? 'ko' : 'blank'}.png" />
 				<h:outputLabel for="adresse">#{i18n.adresseClient} <span class="requis">*</span></h:outputLabel>
 				<h:inputText id="adresse" value="#{creerClientBean.client.adresse}" maxlength="100">
-					<f:ajax event="blur" render="adresseMessage" />
+					<f:ajax event="blur" render="adresseValidationPic" />
 				</h:inputText>
-				<p:message id="adresseMessage" for="adresse" errorClass="erreur" />
+				<h:graphicImage id="adresseValidationPic" library="default" styleClass="validationPic" name="css/images/#{facesContext.validationFailed ? 'ko' : 'blank'}.png" />
 			</fieldset>
 			
 			<fieldset>
 				<legend>#{i18n.infosFacultativesClient}</legend>
 				<h:outputLabel for="taille">#{i18n.tailleClient}</h:outputLabel>
 				<h:inputText id="taille" value="#{creerClientBean.client.taille}">
-					<f:ajax event="blur" render="tailleMessage" />
+					<f:ajax event="blur" render="tailleValidationPic" />
 				</h:inputText>
-				<p:message id="tailleMessage" for="taille" errorClass="erreur" />
+				<h:graphicImage id="tailleValidationPic" library="default" styleClass="validationPic" name="css/images/#{facesContext.validationFailed ? 'ko' : 'blank'}.png" />
 				<h:outputLabel for="poids">#{i18n.poidsClient}</h:outputLabel>
 				<h:inputText id="poids" value="#{creerClientBean.client.poids}">
-					<f:ajax event="blur" render="poidsMessage" />
+					<f:ajax event="blur" render="poidsValidationPic" />
 				</h:inputText>
-				<p:message id="poidsMessage" for="poids" errorClass="erreur" />
+				<h:graphicImage id="poidsValidationPic" library="default" styleClass="validationPic" name="css/images/#{facesContext.validationFailed ? 'ko' : 'blank'}.png" />
 				<h:outputLabel for="tourDePoitrine">#{i18n.tourDePoitrineClient}</h:outputLabel>
 				<h:inputText id="tourDePoitrine" value="#{creerClientBean.client.tourDePoitrine}">
-					<f:ajax event="blur" render="tourDePoitrineMessage" />
+					<f:ajax event="blur" render="tourDePoitrineValidationPic" />
 				</h:inputText>
-				<p:message id="tourDePoitrineMessage" for="tourDePoitrine" errorClass="erreur" />
+				<h:graphicImage id="tourDePoitrineValidationPic" library="default" styleClass="validationPic" name="css/images/#{facesContext.validationFailed ? 'ko' : 'blank'}.png" />
 				<h:outputLabel for="tourDeTaille">#{i18n.tourDeTailleClient}</h:outputLabel>
 				<h:inputText id="tourDeTaille" value="#{creerClientBean.client.tourDeTaille}">
-					<f:ajax event="blur" render="tourDeTailleMessage" />
+					<f:ajax event="blur" render="tourDeTailleValidationPic" />
 				</h:inputText>
-				<p:message id="tourDeTailleMessage" for="tourDeTaille" errorClass="erreur" />
+				<h:graphicImage id="tourDeTailleValidationPic" library="default" styleClass="validationPic" name="css/images/#{facesContext.validationFailed ? 'ko' : 'blank'}.png" />
 				<h:outputLabel for="pointure">#{i18n.pointureClient}</h:outputLabel>
 				<h:inputText id="pointure" value="#{creerClientBean.client.pointure}">
-					<f:ajax event="blur" render="pointureMessage" />
+					<f:ajax event="blur" render="pointureValidationPic" />
 				</h:inputText>
-				<p:message id="pointureMessage" for="pointure" errorClass="erreur" />
+				<h:graphicImage id="pointureValidationPic" library="default" styleClass="validationPic" name="css/images/#{facesContext.validationFailed ? 'ko' : 'blank'}.png" />
 			</fieldset>
 			
 			<fieldset>
@@ -67,9 +67,9 @@
 				<h:selectOneMenu id="modePaiement" value="#{creerClientBean.client.modePaiement}" converter="omnifaces.SelectItemsConverter">
 					<f:selectItem itemLabel="#{i18n.choixItem}" noSelectionOption="true" />
 		            <f:selectItems value="#{creerClientBean.modesPaiement}" var="item" itemLabel="#{item.modePaiement}" />
-		            <f:ajax event="change" render="modePaiementMessage" />
+		            <f:ajax event="change" render="modePaiementValidationPic" />
 		        </h:selectOneMenu>
-				<p:message id="modePaiementMessage" for="modePaiement" errorClass="erreur" />
+				<h:graphicImage id="modePaiementValidationPic" library="default" styleClass="validationPic" name="css/images/#{facesContext.validationFailed ? 'ko' : 'blank'}.png" />
 			</fieldset>
 			
 			<div class="rowButton">

@@ -18,12 +18,14 @@
 				<legend>#{i18n.infosProduit}</legend>
 				<h:outputLabel for="nom">#{i18n.nomProduit} <span class="requis">*</span></h:outputLabel>
 				<h:inputText id="nom" value="#{creerProduitBean.produit.nom}">
-					<f:ajax event="blur" render="nomMessage" />
+					<f:ajax event="blur" render="nomValidationPic" />
 				</h:inputText>
-				<p:message id="nomMessage" for="nom" errorClass="erreur" />
+				<h:graphicImage id="nomValidationPic" library="default" styleClass="validationPic" name="css/images/#{facesContext.validationFailed ? 'ko' : 'blank'}.png" />
 				<h:outputLabel for="taille">#{i18n.tailleProduit}</h:outputLabel>
-				<h:inputText id="taille" value="#{creerProduitBean.produit.taille}" />
-				<p:message id="tailleMessage" for="taille" errorClass="erreur" />
+				<h:inputText id="taille" value="#{creerProduitBean.produit.taille}">
+					<f:ajax event="blur" render="tailleValidationPic" />
+				</h:inputText>
+				<h:graphicImage id="tailleValidationPic" library="default" styleClass="validationPic" name="css/images/#{facesContext.validationFailed ? 'ko' : 'blank'}.png" />
 			</fieldset>
 			
 			<div class="rowButton">
