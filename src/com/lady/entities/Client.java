@@ -1,5 +1,7 @@
 package com.lady.entities;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -33,6 +35,7 @@ public class Client {
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn( name = "modePaiement" )
     private ModePaiement modePaiement;  // nonghang, gonghang, jianhang, zhongxin, zhifubao
+    private Timestamp    dateCreation;
 
     public Long getId() {
         return id;
@@ -112,5 +115,13 @@ public class Client {
 
     public void setPointure( Integer pointure ) {
         this.pointure = pointure;
+    }
+
+    public Timestamp getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation( Timestamp date ) {
+        this.dateCreation = date;
     }
 }

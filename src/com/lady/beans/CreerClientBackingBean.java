@@ -1,6 +1,8 @@
 package com.lady.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +10,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import com.lady.dao.ClientDao;
 import com.lady.dao.ModePaiementDao;
@@ -32,16 +36,24 @@ public class CreerClientBackingBean implements Serializable {
         client = new Client();
     }
 
-    public Map<String, Long> getModesPaiement() {
-        Map<String, Long> map = new HashMap<String, Long>();
+    public Map<String, ModePaiement> getModesPaiement() {
+        Map<String, ModePaiement> map = new HashMap<String, ModePaiement>();
         for ( ModePaiement modePaiement : modePaiementDao.lister() ) {
-            map.put( modePaiement.getModePaiement(), modePaiement.getId() );
+            map.put( modePaiement.getModePaiement(), modePaiement );
         }
         return map;
     }
 
-    public void creer() {
+    public void creer() throws IOException {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        initialiserDateCreation();
         clientDao.creer( client );
+        externalContext.redirect( externalContext.getRequestContextPath() + URL_PAGE_SUJET + String.valueOf( client.getId() ) );
+    }
+
+    private void initialiserDateCreation() {
+        Timestamp date = new Timestamp( System.currentTimeMillis() );
+        client.setDateCreation( date );
     }
 
     public Client getClient() {

@@ -64,10 +64,11 @@
 			<fieldset>
 				<legend>#{i18n.infosPaiementClient}</legend>		
 				<h:outputLabel for="modePaiement">#{i18n.infosPaiementClient}</h:outputLabel>
-		  		<h:selectOneMenu id="modePaiement" value="#{creerClientBean.client.modePaiement}">
-		   			<f:selectItems value="#{creerClientBean.modesPaiement}" />
-		   			<f:converter binding="#{modePaiementConverter}" />
-		   		</h:selectOneMenu>
+				<h:selectOneMenu id="modePaiement" value="#{creerClientBean.client.modePaiement}" converter="omnifaces.SelectItemsConverter">
+		            <f:selectItems value="#{creerClientBean.modesPaiement}" />
+		            <f:ajax render="modePaiementMessage" />
+		        </h:selectOneMenu>
+				   		
 				<p:message id="modePaiementMessage" for="modePaiement" errorClass="erreur" />
 			</fieldset>
 			
