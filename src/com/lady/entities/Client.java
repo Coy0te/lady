@@ -25,7 +25,7 @@ public class Client {
     @NotNull( message = "{portableClient.requis}" )
     @Pattern( regexp = "^\\d+$", message = "{portableClient.format}" )
     private String       portable;
-    @NotNull( message = "{adresseClientRequis}" )
+    @NotNull( message = "{adresseClient.requis}" )
     private String       adresse;
     private Integer      taille;        // cm
     private Integer      poids;         // jin

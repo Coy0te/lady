@@ -16,8 +16,10 @@
 			<h2>#{i18n.creerProduit}</h2>
 			<fieldset>
 				<legend>#{i18n.infosProduit}</legend>
-				<h:outputLabel for="nom">#{i18n.nomProduit}</h:outputLabel>
-				<h:inputText id="nom" value="#{creerProduitBean.produit.nom}" />
+				<h:outputLabel for="nom">#{i18n.nomProduit} <span class="requis">*</span></h:outputLabel>
+				<h:inputText id="nom" value="#{creerProduitBean.produit.nom}">
+					<f:ajax event="blur" render="nomMessage" />
+				</h:inputText>
 				<p:message id="nomMessage" for="nom" errorClass="erreur" />
 				<h:outputLabel for="taille">#{i18n.tailleProduit}</h:outputLabel>
 				<h:inputText id="taille" value="#{creerProduitBean.produit.taille}" />

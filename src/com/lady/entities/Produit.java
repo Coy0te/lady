@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table( name = "produit" )
@@ -18,6 +19,7 @@ public class Produit {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Long      id;
+    @NotNull( message = "{nomProduit.requis}" )
     private String    nom;
     private String    taille;
     @ManyToOne( fetch = FetchType.LAZY )
