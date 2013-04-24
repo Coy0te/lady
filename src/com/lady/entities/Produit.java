@@ -1,5 +1,7 @@
 package com.lady.entities;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,12 +17,13 @@ public class Produit {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private Long     id;
-    private String   nom;
-    private String   taille;
+    private Long      id;
+    private String    nom;
+    private String    taille;
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinTable( name = "produits_commande" )
-    private Commande commande;
+    private Commande  commande;
+    private Timestamp dateCreation;
 
     public Long getId() {
         return id;
@@ -44,5 +47,13 @@ public class Produit {
 
     public void setTaille( String taille ) {
         this.taille = taille;
+    }
+
+    public Timestamp getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation( Timestamp dateCreation ) {
+        this.dateCreation = dateCreation;
     }
 }

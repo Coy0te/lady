@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.joda.time.DateTime;
 
@@ -22,11 +24,18 @@ public class Commande {
     private Long          id;
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn( name = "id_client" )
+    @NotNull( message = "{clientCommande.requis}" )
     private Client        client;
     @OneToMany( fetch = FetchType.LAZY, mappedBy = "commande" )
+    @NotNull( message = "{produitsCommande.requis}" )
     private List<Produit> produits;
+    @NotNull( message = "{prixCoutantCommande.requis}" )
+    @Pattern( regexp = "^\\d+$", message = "{prixCoutantCommande.format}" )
     private Integer       prixCoutant;
+    @NotNull( message = "{prixFactureCommande.requis}" )
+    @Pattern( regexp = "^\\d+$", message = "{prixFactureCommande.format}" )
     private Integer       prixFacture;
+    @NotNull( message = "{modePaiementCommande.requis}" )
     private String        modePaiement;
     private DateTime      datePaiement;
     private DateTime      dateCommandeProduits;

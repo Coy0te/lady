@@ -12,29 +12,25 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import com.lady.dao.ClientDao;
-import com.lady.dao.ModePaiementDao;
-import com.lady.entities.Client;
+import com.lady.dao.ProduitDao;
 import com.lady.entities.ModePaiement;
+import com.lady.entities.Produit;
 
-@ManagedBean( name = "creerClientBean" )
+@ManagedBean( name = "creerProduitBean" )
 @ViewScoped
-public class CreerClientBackingBean implements Serializable {
+public class CreerProduitBackingBean implements Serializable {
     private static final long   serialVersionUID = 1L;
-    private static final String URL_PAGE_CLIENT  = "/listerClients.jsf?clientId=";
+    private static final String URL_PAGE_PRODUIT = "/listerProduits.jsf?produitId=";
 
-    private Client              client;
+    private Produit             produit;
     private List<ModePaiement>  modesPaiement;
 
     @EJB
-    private ClientDao           clientDao;
-    @EJB
-    private ModePaiementDao     modePaiementDao;
+    private ProduitDao          produitDao;
 
     @PostConstruct
     public void init() {
-        client = new Client();
-        modesPaiement = modePaiementDao.lister();
+        produit = new Produit();
     }
 
     public List<ModePaiement> getModesPaiement() {
@@ -44,21 +40,21 @@ public class CreerClientBackingBean implements Serializable {
     public void creer() throws IOException {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         initialiserDateCreation();
-        clientDao.creer( client );
-        externalContext.redirect( externalContext.getRequestContextPath() + URL_PAGE_CLIENT
-                + String.valueOf( client.getId() ) );
+        produitDao.creer( produit );
+        externalContext.redirect( externalContext.getRequestContextPath() + URL_PAGE_PRODUIT
+                + String.valueOf( produit.getId() ) );
     }
 
     private void initialiserDateCreation() {
         Timestamp date = new Timestamp( System.currentTimeMillis() );
-        client.setDateCreation( date );
+        produit.setDateCreation( date );
     }
 
-    public Client getClient() {
-        return client;
+    public Produit getProduit() {
+        return produit;
     }
 
-    public void setClient( Client client ) {
-        this.client = client;
+    public void setProduit( Produit produit ) {
+        this.produit = produit;
     }
 }
