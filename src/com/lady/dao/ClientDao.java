@@ -4,14 +4,18 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import com.lady.entities.Client;
 
 @Stateless
 public class ClientDao {
-    private static final String JPQL_LISTE_CLIENTS = "SELECT c FROM Client c ORDER BY c.id";
+    private static final String JPQL_LISTE_CLIENTS       = "SELECT c FROM Client c ORDER BY c.id";
+    private static final String JPQL_CLIENT_PAR_PORTABLE = "SELECT c FROM Client c WHERE c.portable=:portable";
+    private static final String PARAM_PORTABLE           = "portable";
 
     // Injection du manager, qui s'occupe de la connexion avec la BDD
     @PersistenceContext( unitName = "bdd_lady_PU" )
@@ -40,6 +44,20 @@ public class ClientDao {
     public Client trouver( long id ) throws DAOException {
         try {
             return em.find( Client.class, id );
+        } catch ( Exception e ) {
+            throw new DAOException( e );
+        }
+    }
+
+    /* Recherche d'un client via son numéro de portable */
+    public Client trouver( String portable ) throws DAOException {
+        try {
+            Query query = em.createQuery( JPQL_CLIENT_PAR_PORTABLE );
+            query.setParameter( PARAM_PORTABLE, portable );
+            return (Client) query.setMaxResults( 1 ).getSingleResult();
+        } catch ( NoResultException e ) {
+            // Si aucun sujet dans le forum, on retourne null.
+            return null;
         } catch ( Exception e ) {
             throw new DAOException( e );
         }

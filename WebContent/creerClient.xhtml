@@ -23,6 +23,7 @@
 				<h:outputLabel for="portable">#{i18n.portableClient} <span class="requis">*</span></h:outputLabel>
 				<h:inputText id="portable" value="#{creerClientBean.client.portable}" maxlength="100">
 					<f:ajax event="blur" render="portableValidationPic" />
+					<f:validator binding="#{existencePortableValidator}" />
 				</h:inputText>
 				<h:graphicImage id="portableValidationPic" library="default" styleClass="validationPic" name="css/images/#{facesContext.validationFailed ? 'ko' : 'blank'}.png" />
 				<h:outputLabel for="adresse">#{i18n.adresseClient} <span class="requis">*</span></h:outputLabel>

@@ -1,7 +1,8 @@
 package com.lady.entities;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -24,6 +27,7 @@ public class Client {
     private String       pseudo;
     @NotNull( message = "{portableClient.requis}" )
     @Pattern( regexp = "^\\d+$", message = "{portableClient.format}" )
+    @Column( unique = true )
     private String       portable;
     @NotNull( message = "{adresseClient.requis}" )
     private String       adresse;
@@ -35,7 +39,8 @@ public class Client {
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn( name = "modePaiement" )
     private ModePaiement modePaiement;  // nonghang, gonghang, jianhang, zhongxin, zhifubao
-    private Timestamp    dateCreation;
+    @Temporal( TemporalType.TIMESTAMP )
+    private Date         dateCreation;
 
     public Long getId() {
         return id;
@@ -117,11 +122,11 @@ public class Client {
         this.pointure = pointure;
     }
 
-    public Timestamp getDateCreation() {
+    public Date getDateCreation() {
         return dateCreation;
     }
 
-    public void setDateCreation( Timestamp date ) {
+    public void setDateCreation( Date date ) {
         this.dateCreation = date;
     }
 }

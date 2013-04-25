@@ -1,6 +1,6 @@
 package com.lady.entities;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -19,10 +21,10 @@ public class Produit {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private Long      id;
+    private Long     id;
     @NotNull( message = "{nomProduit.requis}" )
-    private String    nom;
-    private String    taille;
+    private String   nom;
+    private String   taille;
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinTable(
             name = "produits_commandes",
@@ -30,8 +32,9 @@ public class Produit {
             @JoinColumn( name = "produit", referencedColumnName = "id" ),
             inverseJoinColumns =
             @JoinColumn( name = "commande", referencedColumnName = "id" ) )
-    private Commande  commande;
-    private Timestamp dateCreation;
+    private Commande commande;
+    @Temporal( TemporalType.TIMESTAMP )
+    private Date     dateCreation;
 
     public Long getId() {
         return id;
@@ -57,11 +60,11 @@ public class Produit {
         this.taille = taille;
     }
 
-    public Timestamp getDateCreation() {
+    public Date getDateCreation() {
         return dateCreation;
     }
 
-    public void setDateCreation( Timestamp dateCreation ) {
+    public void setDateCreation( Date dateCreation ) {
         this.dateCreation = dateCreation;
     }
 }

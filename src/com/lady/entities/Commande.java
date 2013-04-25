@@ -1,6 +1,6 @@
 package com.lady.entities;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -34,10 +36,14 @@ public class Commande {
     @JoinColumn( name = "modePaiement" )
     @NotNull( message = "{modePaiementCommande.requis}" )
     private ModePaiement modePaiement;
-    private Timestamp    datePaiement;
-    private Timestamp    dateCommandeProduits;
-    private Timestamp    dateReceptionProduits;
-    private Timestamp    dateExpeditionProduits;
+    @Temporal( TemporalType.TIMESTAMP )
+    private Date         datePaiement;
+    @Temporal( TemporalType.TIMESTAMP )
+    private Date         dateCommandeProduits;
+    @Temporal( TemporalType.TIMESTAMP )
+    private Date         dateReceptionProduits;
+    @Temporal( TemporalType.TIMESTAMP )
+    private Date         dateExpeditionProduits;
     private String       modeExpedition;
 
     public Long getId() {
@@ -88,35 +94,35 @@ public class Commande {
         this.modePaiement = modePaiement;
     }
 
-    public Timestamp getDatePaiement() {
+    public Date getDatePaiement() {
         return datePaiement;
     }
 
-    public void setDatePaiement( Timestamp datePaiement ) {
+    public void setDatePaiement( Date datePaiement ) {
         this.datePaiement = datePaiement;
     }
 
-    public Timestamp getDateCommandeProduits() {
+    public Date getDateCommandeProduits() {
         return dateCommandeProduits;
     }
 
-    public void setDateCommandeProduits( Timestamp dateCommandeProduits ) {
+    public void setDateCommandeProduits( Date dateCommandeProduits ) {
         this.dateCommandeProduits = dateCommandeProduits;
     }
 
-    public Timestamp getDateReceptionProduits() {
+    public Date getDateReceptionProduits() {
         return dateReceptionProduits;
     }
 
-    public void setDateReceptionProduits( Timestamp dateReceptionProduits ) {
+    public void setDateReceptionProduits( Date dateReceptionProduits ) {
         this.dateReceptionProduits = dateReceptionProduits;
     }
 
-    public Timestamp getDateExpeditionProduits() {
+    public Date getDateExpeditionProduits() {
         return dateExpeditionProduits;
     }
 
-    public void setDateExpeditionProduits( Timestamp dateExpeditionProduits ) {
+    public void setDateExpeditionProduits( Date dateExpeditionProduits ) {
         this.dateExpeditionProduits = dateExpeditionProduits;
     }
 

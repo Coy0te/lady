@@ -71,7 +71,7 @@
 				<p:message id="modePaiementMessage" for="modePaiement" errorClass="erreur" />
 				<h:outputLabel for="datePaiement">#{i18n.datePaiementCommande} <span class="requis">*</span></h:outputLabel>
 				<h:inputText id="datePaiement" type="date" value="#{creerCommandeBean.commande.datePaiement}">
-					<f:convertDateTime pattern="mm/dd/yyyy"/>
+					<f:convertDateTime pattern="MM/dd/yyyy"/>
 					<f:ajax event="blur" render="datePaiementMessage" />
 				</h:inputText>
 				<p:message id="datePaiementMessage" for="datePaiement" errorClass="erreur" />
