@@ -71,7 +71,7 @@
 				<p:message id="modePaiementMessage" for="modePaiement" errorClass="erreur" />
 				<h:outputLabel for="datePaiement">#{i18n.datePaiementCommande} <span class="requis">*</span></h:outputLabel>
 				<h:inputText id="datePaiement" type="date" value="#{creerCommandeBean.commande.datePaiement}">
-					<f:convertDateTime pattern="MM/dd/yyyy"/>
+					<f:convertDateTime pattern="yyyy-MM-dd"/>
 					<f:ajax event="blur" render="datePaiementMessage" />
 				</h:inputText>
 				<p:message id="datePaiementMessage" for="datePaiement" errorClass="erreur" />
@@ -82,16 +82,19 @@
 				<h:outputLabel for="dateCommandeProduits">#{i18n.dateCommandeProduitsCommande}</h:outputLabel>
 				<h:inputText id="dateCommandeProduits" type="date" value="#{creerCommandeBean.commande.dateCommandeProduits}">
 					<f:ajax event="blur" render="dateCommandeProduitsMessage" />
+					<f:convertDateTime pattern="yyyy-MM-dd"/>
 				</h:inputText>
 				<p:message id="dateCommandeProduitsMessage" for="dateCommandeProduits" errorClass="erreur" />
 				<h:outputLabel for="dateReceptionProduits">#{i18n.dateReceptionProduitsCommande}</h:outputLabel>
 				<h:inputText id="dateReceptionProduits" type="date" value="#{creerCommandeBean.commande.dateReceptionProduits}">
 					<f:ajax event="blur" render="dateReceptionProduitsMessage" />
+					<f:convertDateTime pattern="yyyy-MM-dd"/>
 				</h:inputText>
 				<p:message id="dateReceptionProduitsMessage" for="dateReceptionProduits" errorClass="erreur" />
 				<h:outputLabel for="dateExpeditionProduits">#{i18n.dateExpeditionProduitsCommande}</h:outputLabel>
 				<h:inputText id="dateExpeditionProduits" type="date" value="#{creerCommandeBean.commande.dateExpeditionProduits}">
 					<f:ajax event="blur" render="dateExpeditionProduitsMessage" />
+					<f:convertDateTime pattern="yyyy-MM-dd"/>
 				</h:inputText>
 				<p:message id="dateExpeditionProduitsMessage" for="dateExpeditionProduits" errorClass="erreur" />
 				<h:outputLabel for="modeExpedition">#{i18n.modeExpeditionCommande}</h:outputLabel>
