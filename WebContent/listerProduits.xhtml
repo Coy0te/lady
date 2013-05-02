@@ -11,6 +11,20 @@
 		</ui:include>
 	</ui:define>
 	<ui:define name="body">
-		TODO.
+		<h2>#{i18n.listerProduits}</h2>
+		<table>
+		<tr>
+			<th>#{i18n.nomProduit}</th>
+			<th>#{i18n.tailleProduit}</th>
+			<th>#{i18n.dateCreationProduit}</th>
+		</tr>
+		<ui:repeat value="#{listerProduitsBean.produits}" var="produit">
+		<tr>
+			<td>#{produit.nom}</td> 
+			<td>#{produit.taille}</td>
+			<td>#{produit.dateCreation}</td>
+		</tr>
+		</ui:repeat>
+		</table>
 	</ui:define>
 </ui:composition>

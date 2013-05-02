@@ -21,6 +21,14 @@ ul{
 	margin: 0;
 }
 
+table, tr, td, th{
+	padding: 5px;
+}
+td, th{
+	text-align: center;
+	border: 1px solid #eee;
+}
+
 fieldset {
     padding: 10px;
     border: 2px #03638b solid;
