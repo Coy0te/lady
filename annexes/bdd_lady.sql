@@ -38,7 +38,7 @@ CREATE TABLE `client` (
   UNIQUE KEY `portable` (`portable`),
   KEY `fk_mode_paiement_client` (`modePaiement`),
   CONSTRAINT `fk_mode_paiement_client` FOREIGN KEY (`modePaiement`) REFERENCES `mode_paiement` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (1,'test','13439457305','idfjgndfo iujhdf op54dfg ',156,NULL,54,NULL,45,NULL,'2013-04-24 14:53:36'),(2,'test','454656','fdfsg dfg sd',NULL,NULL,NULL,NULL,NULL,4,'2013-04-24 15:02:23'),(3,'test','54546','SDFSDFsdf',NULL,NULL,NULL,NULL,NULL,NULL,'2013-04-24 15:12:07'),(4,'dfsdf','68465','dfsdf',NULL,NULL,NULL,NULL,NULL,5,'2013-04-24 15:13:20'),(7,'LaChatteALaVoisine','13439457368','sddsf sdf54sd fsd 45f',19,NULL,NULL,NULL,45,1,'2013-04-25 17:18:28'),(8,'???','5646521','??????????',NULL,NULL,NULL,NULL,NULL,5,'2013-05-02 14:52:29');
+INSERT INTO `client` VALUES (1,'test','13439457305','idfjgndfo iujhdf op54dfg ',156,NULL,54,NULL,45,NULL,'2013-04-24 14:53:36'),(2,'test','454656','fdfsg dfg sd',NULL,NULL,NULL,NULL,NULL,4,'2013-04-24 15:02:23'),(3,'test','54546','SDFSDFsdf',NULL,NULL,NULL,NULL,NULL,NULL,'2013-04-24 15:12:07'),(4,'dfsdf','68465','dfsdf',NULL,NULL,NULL,NULL,NULL,5,'2013-04-24 15:13:20'),(7,'LaChatteALaVoisine','13439457368','sddsf sdf54sd fsd 45f',19,NULL,NULL,NULL,45,1,'2013-04-25 17:18:28'),(8,'???','5646521','??????????',NULL,NULL,NULL,NULL,NULL,5,'2013-05-02 14:52:29'),(9,'地方分','123456789','3 rue des moulinards',NULL,NULL,NULL,NULL,NULL,NULL,'2013-05-02 16:41:38');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,4 +199,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-05-02 15:02:33
+-- Dump completed on 2013-05-02 16:41:50
