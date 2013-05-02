@@ -1,6 +1,23 @@
+################################################ UTF-8 ALERT ################################################
+
+Avant de créer la BDD, il faut commencer par s'assurer que l'encoding sous Eclipse est bien "UTF-8" PARTOUT.
+Si ce n'est pas le cas, ça va merder un jour ou l'autre, et ça sera le caca à démerder...
+Bref, bien vérifier que partout où ça parle d'encoding dans les menu Eclipse, c'est précisé "UTF-8".
+
+Vérifier ensuite que GlassFish est bien paramétré (plus précisément, le pool de connexion qui est utilisé), 
+c-a-d que les  paramètres characterEncoding=utf-8 et useUnicode=true sont bien mis en place. 
+Si ce n'est pas le cas, ça ne fonctionnera pas.
+
+Ensuite seulement, on peut attaquer avec sérénité la création de la BDD avec l'encodage UTF-8.
+
+Je répète : s'il manque un seul truc quelque part, c'est foutu et ça va déconner dès qu'un 
+caractère en carton (chinois, etc.) fera son apparition !!
+
+################################################ UTF-8 ALERT ################################################
+
 DROP DATABASE IF EXISTS bdd_lady;
 
-CREATE DATABASE bdd_lady CHARACTER SET 'utf8';
+CREATE DATABASE bdd_lady DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 use bdd_lady;
 
 CREATE TABLE  bdd_lady.mode_expedition (
@@ -29,6 +46,7 @@ CREATE TABLE  bdd_lady.produit (
   id INT( 11 ) NOT NULL AUTO_INCREMENT ,  
   nom VARCHAR( 100 ) NOT NULL, 
   taille VARCHAR( 10 ) ,
+  dateCreation DATETIME NOT NULL ,
   PRIMARY KEY ( id )
 ) 
 ENGINE = INNODB;
@@ -50,6 +68,7 @@ CREATE TABLE  bdd_lady.client (
   CONSTRAINT fk_mode_paiement_client FOREIGN KEY (modePaiement) REFERENCES mode_paiement(id)
 ) 
 ENGINE = INNODB;
+INSERT INTO client (pseudo, portable, adresse, dateCreation)  VALUES( "地方分", "123456789", "3 rue des moulinards", NOW() );
 
 
 CREATE TABLE  bdd_lady.commande (
