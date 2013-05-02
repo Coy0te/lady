@@ -10,6 +10,22 @@
 		</ui:include>
 	</ui:define>
 	<ui:define name="body">
-		TODO.
+		<h2>#{i18n.listerClients}</h2>
+		<table>
+		<tr>
+			<th>#{i18n.pseudoClient}</th>
+			<th>#{i18n.portableClient}</th>
+			<th>#{i18n.adresseClient}</th>
+			<th>#{i18n.dateCreationClient}</th>
+		</tr>
+		<ui:repeat value="#{listerClientsBean.clients}" var="client">
+		<tr>
+			<td>#{client.pseudo}</td> 
+			<td>#{client.portable}</td>
+			<td>#{client.adresse}</td>
+			<td>#{client.dateCreation}</td>
+		</tr>
+		</ui:repeat>
+		</table>
 	</ui:define>
 </ui:composition>
