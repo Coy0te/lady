@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.29, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.31, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: bdd_lady
 -- ------------------------------------------------------
--- Server version	5.5.29-0ubuntu0.12.04.2
+-- Server version	5.5.31-0ubuntu0.12.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -38,7 +38,7 @@ CREATE TABLE `client` (
   UNIQUE KEY `portable` (`portable`),
   KEY `fk_mode_paiement_client` (`modePaiement`),
   CONSTRAINT `fk_mode_paiement_client` FOREIGN KEY (`modePaiement`) REFERENCES `mode_paiement` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (1,'test','13439457305','idfjgndfo iujhdf op54dfg ',156,NULL,54,NULL,45,NULL,'2013-04-24 14:53:36'),(2,'test','454656','fdfsg dfg sd',NULL,NULL,NULL,NULL,NULL,4,'2013-04-24 15:02:23'),(3,'test','54546','SDFSDFsdf',NULL,NULL,NULL,NULL,NULL,NULL,'2013-04-24 15:12:07'),(4,'dfsdf','68465','dfsdf',NULL,NULL,NULL,NULL,NULL,5,'2013-04-24 15:13:20');
+INSERT INTO `client` VALUES (1,'test','13439457305','idfjgndfo iujhdf op54dfg ',156,NULL,54,NULL,45,NULL,'2013-04-24 14:53:36'),(2,'test','454656','fdfsg dfg sd',NULL,NULL,NULL,NULL,NULL,4,'2013-04-24 15:02:23'),(3,'test','54546','SDFSDFsdf',NULL,NULL,NULL,NULL,NULL,NULL,'2013-04-24 15:12:07'),(4,'dfsdf','68465','dfsdf',NULL,NULL,NULL,NULL,NULL,5,'2013-04-24 15:13:20'),(7,'LaChatteALaVoisine','13439457368','sddsf sdf54sd fsd 45f',19,NULL,NULL,NULL,45,1,'2013-04-25 17:18:28');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,7 +76,7 @@ CREATE TABLE `commande` (
   CONSTRAINT `fk_client_commande` FOREIGN KEY (`client`) REFERENCES `client` (`id`),
   CONSTRAINT `fk_mode_expedition_commande` FOREIGN KEY (`modeExpedition`) REFERENCES `mode_expedition` (`id`),
   CONSTRAINT `fk_mode_paiement_commande` FOREIGN KEY (`modePaiement`) REFERENCES `mode_paiement` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,6 +85,7 @@ CREATE TABLE `commande` (
 
 LOCK TABLES `commande` WRITE;
 /*!40000 ALTER TABLE `commande` DISABLE KEYS */;
+INSERT INTO `commande` VALUES (1,3,123,12321,4,NULL,NULL,NULL,NULL,NULL),(2,1,125,456,2,NULL,NULL,NULL,NULL,NULL),(3,4,65,654,5,NULL,NULL,NULL,NULL,NULL),(4,4,684,6544,3,'2008-05-26 08:00:00',NULL,NULL,NULL,NULL),(5,4,654,6544,3,NULL,NULL,NULL,NULL,NULL),(6,1,654,65444,1,'2009-08-26 08:00:00',NULL,NULL,NULL,NULL),(7,7,15,450,5,NULL,NULL,NULL,NULL,NULL),(8,7,15,450,5,NULL,NULL,NULL,NULL,NULL),(9,7,12,123,3,'2013-04-26 08:00:00',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `commande` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +150,7 @@ CREATE TABLE `produit` (
   `taille` varchar(10) DEFAULT NULL,
   `dateCreation` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,6 +159,7 @@ CREATE TABLE `produit` (
 
 LOCK TABLES `produit` WRITE;
 /*!40000 ALTER TABLE `produit` DISABLE KEYS */;
+INSERT INTO `produit` VALUES (1,'cx',NULL,'2013-04-24 16:44:45'),(2,'Marcel top classe fluo rose','L','2013-04-25 17:22:14');
 /*!40000 ALTER TABLE `produit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,6 +186,7 @@ CREATE TABLE `produits_commandes` (
 
 LOCK TABLES `produits_commandes` WRITE;
 /*!40000 ALTER TABLE `produits_commandes` DISABLE KEYS */;
+INSERT INTO `produits_commandes` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(2,7),(2,8),(2,9);
 /*!40000 ALTER TABLE `produits_commandes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -196,4 +199,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-04-24 15:49:31
+-- Dump completed on 2013-05-02 14:42:15
