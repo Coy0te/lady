@@ -13,19 +13,27 @@
 	</ui:define>
 	<ui:define name="body">
 		<h2>#{i18n.listerProduits}</h2>
-		<table>
-		<tr>
-			<th>#{i18n.nomProduit}</th>
-			<th>#{i18n.tailleProduit}</th>
-			<th>#{i18n.dateCreationProduit}</th>
-		</tr>
-		<ui:repeat value="#{listerProduitsBean.produits}" var="produit" varStatus="loop">
-		<tr class="#{loop.index % 2 == 0 ? 'even' : 'odd'}">
-			<td>#{produit.nom}</td> 
-			<td>#{produit.taille}</td>
-			<td>#{of:formatDate(produit.dateCreation, 'yyyy年MM月dd日')}</td>
-		</tr>
-		</ui:repeat>
-		</table>
+		<h:form id="form">
+   		<h:dataTable value="#{listerProduitsBean.produits}" var="produit" rowClasses="odd,even" id="tableauProduits">
+   			<h:column>
+   				<f:facet name="header">#{i18n.nomProduit}</f:facet>
+   				#{produit.nom}
+   			</h:column>
+   			<h:column>
+   				<f:facet name="header">#{i18n.tailleProduit}</f:facet>
+   				#{produit.taille}
+   			</h:column>
+   			<h:column>
+   				<f:facet name="header">#{i18n.dateCreationProduit}</f:facet>
+   				#{of:formatDate(produit.dateCreation, 'yyyy年MM月dd日')}
+   			</h:column>
+   			<h:column>
+   				<f:facet name="header">#{i18n.actions}</f:facet>
+   				<h:commandButton onclick="return confirm('#{i18n.confirmation}');" value="#{i18n.supprimer}" type="submit" action="#{listerProduitsBean.supprimer(produit)}" styleClass="btn btn-primary right-flt">
+					<f:ajax render="@form :form:tableauProduits" />
+				</h:commandButton>
+   			</h:column>
+   		</h:dataTable>
+		</h:form>
 	</ui:define>
 </ui:composition>

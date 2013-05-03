@@ -29,4 +29,9 @@ public class ListerCommandesBackingBean implements Serializable {
     public List<Commande> getCommandes() {
         return commandes;
     }
+
+    public void supprimer( Commande commande ) {
+        commandeDao.supprimer( commande );
+        commandes.remove( commande );
+    }
 }

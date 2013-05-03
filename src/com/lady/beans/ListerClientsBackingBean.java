@@ -29,4 +29,9 @@ public class ListerClientsBackingBean implements Serializable {
     public List<Client> getClients() {
         return clients;
     }
+
+    public void supprimer( Client client ) {
+        clientDao.supprimer( client );
+        clients.remove( client );
+    }
 }

@@ -47,6 +47,9 @@ tr:hover{
 	background-color: rgb(0, 45, 64);
 	color: #fff;
 }
+td input.btn-primary{
+	margin-top: 0px;
+}
 
 fieldset {
     padding: 10px;

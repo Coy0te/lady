@@ -13,27 +13,43 @@
 	</ui:define>
 	<ui:define name="body">
 		<h2>#{i18n.listerCommandes}</h2>
-		<table>
-		<tr>
-			<th>#{i18n.clientCommande}</th>
-			<th>#{i18n.produitsCommande}</th>
-			<th>#{i18n.prixCoutantCommande}</th>
-			<th>#{i18n.prixFactureCommande}</th>
-			<th>#{i18n.beneficesCommande}</th>
-			<th>#{i18n.modePaiementCommande}</th>
-			<th>#{i18n.datePaiementCommande}</th>
-		</tr>
-		<ui:repeat value="#{listerCommandesBean.commandes}" var="commande" varStatus="loop">
-		<tr class="#{loop.index % 2 == 0 ? 'even' : 'odd'}">
-			<td>#{commande.client.pseudo}</td> 
-			<td>#{commande.produit.nom} - #{commande.produit.taille}</td>
-			<td>#{commande.prixCoutant}</td>
-			<td>#{commande.prixFacture}</td>
-			<td>#{commande.prixFacture - commande.prixCoutant}</td>
-			<td>#{commande.modePaiement.modePaiement}</td>
-			<td>#{of:formatDate(commande.datePaiement, 'yyyy年MM月dd日')}</td>
-		</tr>
-		</ui:repeat>
-		</table>
+		<h:form id="form">
+   		<h:dataTable value="#{listerCommandesBean.commandes}" var="commande" rowClasses="odd,even" id="tableauCommandes">
+   			<h:column>
+   				<f:facet name="header">#{i18n.clientCommande}</f:facet>
+   				#{commande.client.pseudo}
+   			</h:column>
+   			<h:column>
+   				<f:facet name="header">#{i18n.produitsCommande}</f:facet>
+   				#{commande.produit.nom} - #{commande.produit.taille}
+   			</h:column>
+   			<h:column>
+   				<f:facet name="header">#{i18n.prixCoutantCommande}</f:facet>
+   				#{commande.prixCoutant}
+   			</h:column>
+   			<h:column>
+   				<f:facet name="header">#{i18n.prixFactureCommande}</f:facet>
+   				#{commande.prixFacture}
+   			</h:column>
+   			<h:column>
+   				<f:facet name="header">#{i18n.beneficesCommande}</f:facet>
+   				#{commande.prixFacture - commande.prixCoutant}
+   			</h:column>
+   			<h:column>
+   				<f:facet name="header">#{i18n.modePaiementCommande}</f:facet>
+   				#{commande.modePaiement.modePaiement}
+   			</h:column>
+   			<h:column>
+   				<f:facet name="header">#{i18n.datePaiementCommande}</f:facet>
+   				#{of:formatDate(commande.datePaiement, 'yyyy年MM月dd日')}
+   			</h:column>
+   			<h:column>
+   				<f:facet name="header">#{i18n.actions}</f:facet>
+   				<h:commandButton onclick="return confirm('#{i18n.confirmation}');" value="#{i18n.supprimer}" type="submit" action="#{listerCommandesBean.supprimer(commande)}" styleClass="btn btn-primary right-flt">
+					<f:ajax render="@form :form:tableauCommandes" />
+				</h:commandButton>
+   			</h:column>
+   		</h:dataTable>
+		</h:form>
 	</ui:define>
 </ui:composition>

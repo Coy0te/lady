@@ -12,21 +12,31 @@
 	</ui:define>
 	<ui:define name="body">
 		<h2>#{i18n.listerClients}</h2>
-		<table>
-		<tr>
-			<th>#{i18n.pseudoClient}</th>
-			<th>#{i18n.portableClient}</th>
-			<th>#{i18n.adresseClient}</th>
-			<th>#{i18n.dateCreationClient}</th>
-		</tr>
-		<ui:repeat value="#{listerClientsBean.clients}" var="client" varStatus="loop">
-		<tr class="#{loop.index % 2 == 0 ? 'even' : 'odd'}">
-			<td>#{client.pseudo}</td> 
-			<td>#{client.portable}</td>
-			<td>#{client.adresse}</td>
-			<td>#{of:formatDate(client.dateCreation, 'yyyy年MM月dd日')}</td>
-		</tr>
-		</ui:repeat>
-		</table>
+		<h:form id="form">
+   		<h:dataTable value="#{listerClientsBean.clients}" var="client" rowClasses="odd,even" id="tableauClients">
+   			<h:column>
+   				<f:facet name="header">#{i18n.pseudoClient}</f:facet>
+   				#{client.pseudo}
+   			</h:column>
+   			<h:column>
+   				<f:facet name="header">#{i18n.portableClient}</f:facet>
+   				#{client.portable}
+   			</h:column>
+   			<h:column>
+   				<f:facet name="header">#{i18n.adresseClient}</f:facet>
+   				#{client.adresse}
+   			</h:column>
+   			<h:column>
+   				<f:facet name="header">#{i18n.dateCreationClient}</f:facet>
+   				#{of:formatDate(client.dateCreation, 'yyyy年MM月dd日')}
+   			</h:column>
+   			<h:column>
+   				<f:facet name="header">#{i18n.actions}</f:facet>
+   				<h:commandButton onclick="return confirm('#{i18n.confirmation}');" value="#{i18n.supprimer}" type="submit" action="#{listerClientsBean.supprimer(client)}" styleClass="btn btn-primary right-flt">
+					<f:ajax render="@form :form:tableauClients" />
+				</h:commandButton>
+   			</h:column>
+   		</h:dataTable>
+		</h:form>
 	</ui:define>
 </ui:composition>
