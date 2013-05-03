@@ -1,4 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:of="http://omnifaces.org/functions"
 				template="/WEB-INF/templates/template_base.xhtml">
 	<ui:define name="title">
 		#{i18n.clients}
@@ -18,12 +19,12 @@
 			<th>#{i18n.adresseClient}</th>
 			<th>#{i18n.dateCreationClient}</th>
 		</tr>
-		<ui:repeat value="#{listerClientsBean.clients}" var="client">
-		<tr>
+		<ui:repeat value="#{listerClientsBean.clients}" var="client" varStatus="loop">
+		<tr class="#{loop.index % 2 == 0 ? 'even' : 'odd'}">
 			<td>#{client.pseudo}</td> 
 			<td>#{client.portable}</td>
 			<td>#{client.adresse}</td>
-			<td>#{client.dateCreation}</td>
+			<td>#{of:formatDate(client.dateCreation, 'yyyy年MM月dd日')}</td>
 		</tr>
 		</ui:repeat>
 		</table>

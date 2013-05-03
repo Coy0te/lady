@@ -1,4 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:of="http://omnifaces.org/functions"
 				template="/WEB-INF/templates/template_base.xhtml">
 	<ui:define name="title">
 		#{i18n.commandes}
@@ -22,15 +23,15 @@
 			<th>#{i18n.modePaiementCommande}</th>
 			<th>#{i18n.datePaiementCommande}</th>
 		</tr>
-		<ui:repeat value="#{listerCommandesBean.commandes}" var="commande">
-		<tr>
+		<ui:repeat value="#{listerCommandesBean.commandes}" var="commande" varStatus="loop">
+		<tr class="#{loop.index % 2 == 0 ? 'even' : 'odd'}">
 			<td>#{commande.client.pseudo}</td> 
-			<td>#{commande.produit.nom - commande.produit.taille}</td>
+			<td>#{commande.produit.nom} - #{commande.produit.taille}</td>
 			<td>#{commande.prixCoutant}</td>
 			<td>#{commande.prixFacture}</td>
 			<td>#{commande.prixFacture - commande.prixCoutant}</td>
 			<td>#{commande.modePaiement.modePaiement}</td>
-			<td>#{commande.datePaiement}</td>
+			<td>#{of:formatDate(commande.datePaiement, 'yyyy年MM月dd日')}</td>
 		</tr>
 		</ui:repeat>
 		</table>

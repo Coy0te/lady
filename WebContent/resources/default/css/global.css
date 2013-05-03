@@ -21,12 +21,31 @@ ul{
 	margin: 0;
 }
 
-table, tr, td, th{
-	padding: 5px;
+table{
+	margin: 5px auto;
+}
+table, td, th{
+	padding: 10px;
+	border: none;
+	border-collapse: collapse;
 }
 td, th{
 	text-align: center;
-	border: 1px solid #eee;
+}
+th{
+	font-weight: bold;
+	background-color: rgb(3, 99, 139);
+	color: #fff;
+}
+tr.even{
+	background-color: #eee;
+}
+tr.odd{
+	background-color: #fff;
+}
+tr:hover{
+	background-color: rgb(0, 45, 64);
+	color: #fff;
 }
 
 fieldset {

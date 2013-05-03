@@ -1,4 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:of="http://omnifaces.org/functions"
 				template="/WEB-INF/templates/template_base.xhtml">
 	<ui:define name="title">
 		#{i18n.produits}
@@ -18,11 +19,11 @@
 			<th>#{i18n.tailleProduit}</th>
 			<th>#{i18n.dateCreationProduit}</th>
 		</tr>
-		<ui:repeat value="#{listerProduitsBean.produits}" var="produit">
-		<tr>
+		<ui:repeat value="#{listerProduitsBean.produits}" var="produit" varStatus="loop">
+		<tr class="#{loop.index % 2 == 0 ? 'even' : 'odd'}">
 			<td>#{produit.nom}</td> 
 			<td>#{produit.taille}</td>
-			<td>#{produit.dateCreation}</td>
+			<td>#{of:formatDate(produit.dateCreation, 'yyyy年MM月dd日')}</td>
 		</tr>
 		</ui:repeat>
 		</table>
