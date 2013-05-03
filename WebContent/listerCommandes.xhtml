@@ -11,6 +11,28 @@
 		</ui:include>
 	</ui:define>
 	<ui:define name="body">
-		TODO.
+		<h2>#{i18n.listerCommandes}</h2>
+		<table>
+		<tr>
+			<th>#{i18n.clientCommande}</th>
+			<th>#{i18n.produitsCommande}</th>
+			<th>#{i18n.prixCoutantCommande}</th>
+			<th>#{i18n.prixFactureCommande}</th>
+			<th>#{i18n.beneficesCommande}</th>
+			<th>#{i18n.modePaiementCommande}</th>
+			<th>#{i18n.datePaiementCommande}</th>
+		</tr>
+		<ui:repeat value="#{listerCommandesBean.commandes}" var="commande">
+		<tr>
+			<td>#{commande.client.pseudo}</td> 
+			<td>#{commande.produit}</td>
+			<td>#{commande.prixCoutant}</td>
+			<td>#{commande.prixFacture}</td>
+			<td>#{commande.prixFacture - commande.prixCoutant}</td>
+			<td>#{commande.modePaiement.modePaiement}</td>
+			<td>#{commande.datePaiement}</td>
+		</tr>
+		</ui:repeat>
+		</table>
 	</ui:define>
 </ui:composition>
