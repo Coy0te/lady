@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+				template="/WEB-INF/templates/template_base.xhtml">
+	<ui:define name="title">
+		Statistiques
+	</ui:define>
+	<ui:define name="header">
+		<ui:include src="/WEB-INF/snippets/header/inc_header.xhtml">
+			<ui:param name="titrePage" value="Statistiques"/>
+			<ui:param name="descriptionPage" value="Lady Zhuzhu Analytics"/>
+			<ui:param name="logoPage" value="lettre"/>
+		</ui:include>
+	</ui:define>
+	<ui:define name="body">
+	<h:form id="form">
+		<fieldset>
+		<h:outputLabel for="dateDebut">#{i18n.dateDebut} <span class="requis">*</span></h:outputLabel>
+		<h:inputText id="dateDebut" type="date" value="#{statsBean.dateDebut}">
+			<f:convertDateTime pattern="yyyy-MM-dd"/>
+			<f:ajax event="blur" render="dateDebutMessage" />
+		</h:inputText>
+		<p:message id="dateDebutMessage" for="dateDebut" errorClass="erreur" />
+		
+		<h:outputLabel for="dateFin">#{i18n.dateFin} <span class="requis">*</span></h:outputLabel>
+		<h:inputText id="dateFin" type="date" value="#{statsBean.dateFin}">
+			<f:convertDateTime pattern="yyyy-MM-dd"/>
+			<f:ajax event="blur" render="dateFinMessage" />
+		</h:inputText>
+		<p:message id="dateFinMessage" for="dateFin" errorClass="erreur" />
+	
+		<h:commandButton id="bouton" value="#{i18n.boutonAfficherStats}" type="submit" styleClass="btn btn-primary right-flt">
+			<f:ajax execute="@form" render="@form :form:graphiques" />
+		</h:commandButton>
+		</fieldset>
+		
+		<h:panelGroup id="graphiques">
+			<p:lineChart animate="true" value="#{statsBean.evolutionClientsModel}" title="#{i18n.evolutionClients} du #{of:formatDate(statsBean.dateDebut, 'yyyy年MM月dd日')} au #{of:formatDate(statsBean.dateFin, 'yyyy年MM月dd日')}" minY="0" maxY="10" style="height:300px;margin-top: 20px;"/> 
+		</h:panelGroup>
+	</h:form>
+	</ui:define>
+</ui:composition>

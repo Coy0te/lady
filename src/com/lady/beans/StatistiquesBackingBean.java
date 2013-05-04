@@ -58,10 +58,10 @@ public class StatistiquesBackingBean implements Serializable {
         dateDebut = ( new DateTime( dateDebut ) ).dayOfMonth().withMinimumValue().toDate();
         dateFin = ( new DateTime( dateFin ) ).dayOfMonth().withMaximumValue().toDate();
 
-        List<Client> clients;
         evolutionClientsModel = new CartesianChartModel();
         ChartSeries currentMonth = new ChartSeries();
-        clients = clientDao.lister( dateDebut, dateFin );
+
+        List<Client> clients = clientDao.lister( dateDebut, dateFin );
         Map<Object, Number> map = new TreeMap<Object, Number>();
         String date = null;
         DateTimeFormatter fmt = DateTimeFormat.forPattern( "yyyy年MM月dd日" );
