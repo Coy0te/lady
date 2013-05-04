@@ -35,6 +35,10 @@ public class StatistiquesClientsBackingBean implements Serializable {
 
     @PostConstruct
     public void init() {
+        createEvolutionClientModel();
+    }
+
+    private void createEvolutionClientModel() {
         // Création d'un graphique vide pour qu'il s'affiche et puisse être MAJ via ajax
         evolutionClientsModel = new CartesianChartModel();
         ChartSeries dummyMonth = new ChartSeries();
