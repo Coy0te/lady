@@ -35,6 +35,7 @@
 		
 		<h:panelGroup id="graphiques">
 			<p:lineChart animate="true" value="#{statsCommandesBean.evolutionCommandesModel}" title="#{i18n.evolutionCommandes} du #{of:formatDate(statsCommandesBean.dateDebut, 'yyyy年MM月dd日')} au #{of:formatDate(statsCommandesBean.dateFin, 'yyyy年MM月dd日')}" minY="0" maxY="10" style="height:300px;margin-top: 20px;"/> 
+			<h2>Bénéfices réalisés sur la période : #{statsCommandesBean.prixFactureTotal - statsCommandesBean.prixCoutantTotal}</h2>
 		</h:panelGroup>
 	</h:form>
 	</ui:define>

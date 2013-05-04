@@ -27,6 +27,8 @@ public class StatistiquesCommandesBackingBean implements Serializable {
 
     private Date                dateDebut;
     private Date                dateFin;
+    private int                 prixFactureTotal;
+    private int                 prixCoutantTotal;
 
     private CartesianChartModel evolutionCommandesModel;
 
@@ -62,7 +64,11 @@ public class StatistiquesCommandesBackingBean implements Serializable {
         Map<Object, Number> map = new TreeMap<Object, Number>();
         String date = null;
         DateTimeFormatter fmt = DateTimeFormat.forPattern( "yyyy年MM月dd日" );
+        prixFactureTotal = 0;
+        prixCoutantTotal = 0;
         for ( Commande commande : commandes ) {
+            prixFactureTotal += commande.getPrixFacture();
+            prixCoutantTotal += commande.getPrixCoutant();
             date = new DateTime( commande.getDatePaiement() ).toDateMidnight().toString( fmt );
             Number count = map.get( date );
             if ( count == null ) {
@@ -90,5 +96,13 @@ public class StatistiquesCommandesBackingBean implements Serializable {
 
     public void setDateDebut( Date dateDebut ) {
         this.dateDebut = dateDebut;
+    }
+
+    public int getPrixFactureTotal() {
+        return prixFactureTotal;
+    }
+
+    public int getPrixCoutantTotal() {
+        return prixCoutantTotal;
     }
 }
