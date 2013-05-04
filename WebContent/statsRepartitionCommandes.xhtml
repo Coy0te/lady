@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" 
+				xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+				template="/WEB-INF/templates/template_base.xhtml">
+	<ui:define name="title">
+		Statistiques répartition commandes
+	</ui:define>
+	<ui:define name="header">
+		<ui:include src="/WEB-INF/snippets/header/inc_header.xhtml">
+			<ui:param name="titrePage" value="Statistiques"/>
+			<ui:param name="descriptionPage" value="Lady Zhuzhu Analytics"/>
+			<ui:param name="logoPage" value="lettre"/>
+		</ui:include>
+	</ui:define>
+	<ui:define name="body">	
+		<h:panelGroup id="graphiques">
+			<p:pieChart id="custom" value="#{statsCommandesBean.repartitionCommandesModel}" legendPosition="e" fill="false" showDataLabels="true"  
+                 title="#{i18n.repartitionCommandes}" style="width:400px;height:300px" sliceMargin="5" diameter="150" /> 
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>

@@ -16,8 +16,10 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.PieChartModel;
 
 import com.lady.dao.CommandeDao;
+import com.lady.entities.Client;
 import com.lady.entities.Commande;
 
 @ManagedBean( name = "statsCommandesBean" )
@@ -31,6 +33,7 @@ public class StatistiquesCommandesBackingBean implements Serializable {
     private int                 prixCoutantTotal;
 
     private CartesianChartModel evolutionCommandesModel;
+    private PieChartModel       repartitionCommandesModel;
 
     @EJB
     private CommandeDao         commandeDao;
@@ -80,6 +83,24 @@ public class StatistiquesCommandesBackingBean implements Serializable {
         currentMonth.setData( map );
         evolutionCommandesModel.addSeries( currentMonth );
         return evolutionCommandesModel;
+    }
+
+    public PieChartModel getRepartitionCommandesModel() {
+        repartitionCommandesModel = new PieChartModel();
+        List<Commande> commandes = commandeDao.lister();
+        Map<String, Number> map = new TreeMap<String, Number>();
+        Client client = null;
+        for ( Commande commande : commandes ) {
+            client = commande.getClient();
+            Number count = map.get( client.getPseudo() );
+            if ( count == null ) {
+                map.put( client.getPseudo(), 1 );
+            } else {
+                map.put( client.getPseudo(), count.intValue() + 1 );
+            }
+        }
+        repartitionCommandesModel.setData( map );
+        return repartitionCommandesModel;
     }
 
     public Date getDateFin() {
