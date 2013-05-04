@@ -1,5 +1,6 @@
 package com.lady.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -13,9 +14,12 @@ import com.lady.entities.Client;
 
 @Stateless
 public class ClientDao {
-    private static final String JPQL_LISTE_CLIENTS       = "SELECT c FROM Client c ORDER BY c.id";
-    private static final String JPQL_CLIENT_PAR_PORTABLE = "SELECT c FROM Client c WHERE c.portable=:portable";
-    private static final String PARAM_PORTABLE           = "portable";
+    private static final String JPQL_LISTE_CLIENTS              = "SELECT c FROM Client c ORDER BY c.dateCreation DESC";
+    private static final String JPQL_LISTE_CLIENTS_POUR_PERIODE = "SELECT c FROM Client c WHERE c.dateCreation>:dateDebut AND c.dateCreation<:dateFin ORDER BY c.dateCreation";
+    private static final String JPQL_CLIENT_PAR_PORTABLE        = "SELECT c FROM Client c WHERE c.portable=:portable";
+    private static final String PARAM_PORTABLE                  = "portable";
+    private static final String PARAM_DEBUT                     = "dateDebut";
+    private static final String PARAM_FIN                       = "dateFin";
 
     // Injection du manager, qui s'occupe de la connexion avec la BDD
     @PersistenceContext( unitName = "bdd_lady_PU" )
@@ -34,6 +38,18 @@ public class ClientDao {
     public List<Client> lister() throws DAOException {
         try {
             TypedQuery<Client> query = em.createQuery( JPQL_LISTE_CLIENTS, Client.class );
+            return query.getResultList();
+        } catch ( Exception e ) {
+            throw new DAOException( e );
+        }
+    }
+
+    /* Récupération de la liste des clients pour une période donnée */
+    public List<Client> lister( Date debut, Date fin ) throws DAOException {
+        try {
+            TypedQuery<Client> query = em.createQuery( JPQL_LISTE_CLIENTS_POUR_PERIODE, Client.class );
+            query.setParameter( PARAM_DEBUT, debut );
+            query.setParameter( PARAM_FIN, fin );
             return query.getResultList();
         } catch ( Exception e ) {
             throw new DAOException( e );

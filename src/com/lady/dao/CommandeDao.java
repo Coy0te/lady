@@ -1,5 +1,6 @@
 package com.lady.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -11,7 +12,10 @@ import com.lady.entities.Commande;
 
 @Stateless
 public class CommandeDao {
-    private static final String JPQL_LISTE_COMMANDES = "SELECT c FROM Commande c ORDER BY c.id";
+    private static final String JPQL_LISTE_COMMANDES              = "SELECT c FROM Commande c ORDER BY c.datePaiement DESC";
+    private static final String JPQL_LISTE_COMMANDES_POUR_PERIODE = "SELECT c FROM Commande c WHERE c.datePaiement>:dateDebut AND c.datePaiement<:dateFin ORDER BY c.datePaiement";
+    private static final String PARAM_DEBUT                       = "dateDebut";
+    private static final String PARAM_FIN                         = "dateFin";
 
     // Injection du manager, qui s'occupe de la connexion avec la BDD
     @PersistenceContext( unitName = "bdd_lady_PU" )
@@ -30,6 +34,18 @@ public class CommandeDao {
     public List<Commande> lister() throws DAOException {
         try {
             TypedQuery<Commande> query = em.createQuery( JPQL_LISTE_COMMANDES, Commande.class );
+            return query.getResultList();
+        } catch ( Exception e ) {
+            throw new DAOException( e );
+        }
+    }
+
+    /* Récupération de la liste des commandes pour une période donnée */
+    public List<Commande> lister( Date debut, Date fin ) throws DAOException {
+        try {
+            TypedQuery<Commande> query = em.createQuery( JPQL_LISTE_COMMANDES_POUR_PERIODE, Commande.class );
+            query.setParameter( PARAM_DEBUT, debut );
+            query.setParameter( PARAM_FIN, fin );
             return query.getResultList();
         } catch ( Exception e ) {
             throw new DAOException( e );
