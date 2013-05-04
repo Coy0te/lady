@@ -17,33 +17,30 @@ import org.joda.time.format.DateTimeFormatter;
 import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
 
-import com.lady.dao.ClientDao;
 import com.lady.dao.CommandeDao;
-import com.lady.entities.Client;
+import com.lady.entities.Commande;
 
-@ManagedBean( name = "statsBean" )
+@ManagedBean( name = "statsCommandesBean" )
 @ViewScoped
-public class StatistiquesBackingBean implements Serializable {
+public class StatistiquesCommandesBackingBean implements Serializable {
     private static final long   serialVersionUID = 1L;
 
     private Date                dateDebut;
     private Date                dateFin;
 
-    private CartesianChartModel evolutionClientsModel;
+    private CartesianChartModel evolutionCommandesModel;
 
-    @EJB
-    private ClientDao           clientDao;
     @EJB
     private CommandeDao         commandeDao;
 
     @PostConstruct
     public void init() {
         // Création d'un graphique vide pour qu'il s'affiche et puisse être MAJ via ajax
-        evolutionClientsModel = new CartesianChartModel();
+        evolutionCommandesModel = new CartesianChartModel();
         ChartSeries dummyMonth = new ChartSeries();
         dummyMonth.setLabel( "Exemple" );
         dummyMonth.set( 0, 0 );
-        evolutionClientsModel.addSeries( dummyMonth );
+        evolutionCommandesModel.addSeries( dummyMonth );
     }
 
     /*
@@ -51,22 +48,22 @@ public class StatistiquesBackingBean implements Serializable {
      * clients - répartition clients / bénéfices
      */
 
-    public CartesianChartModel getEvolutionClientsModel() {
+    public CartesianChartModel getEvolutionCommandesModel() {
         if ( dateDebut == null ) {
-            return evolutionClientsModel;
+            return evolutionCommandesModel;
         }
         dateDebut = ( new DateTime( dateDebut ) ).dayOfMonth().withMinimumValue().toDate();
         dateFin = ( new DateTime( dateFin ) ).dayOfMonth().withMaximumValue().toDate();
 
-        evolutionClientsModel = new CartesianChartModel();
+        evolutionCommandesModel = new CartesianChartModel();
         ChartSeries currentMonth = new ChartSeries();
 
-        List<Client> clients = clientDao.lister( dateDebut, dateFin );
+        List<Commande> commandes = commandeDao.lister( dateDebut, dateFin );
         Map<Object, Number> map = new TreeMap<Object, Number>();
         String date = null;
         DateTimeFormatter fmt = DateTimeFormat.forPattern( "yyyy年MM月dd日" );
-        for ( Client client : clients ) {
-            date = new DateTime( client.getDateCreation() ).toDateMidnight().toString( fmt );
+        for ( Commande commande : commandes ) {
+            date = new DateTime( commande.getDatePaiement() ).toDateMidnight().toString( fmt );
             Number count = map.get( date );
             if ( count == null ) {
                 map.put( date, 1 );
@@ -75,8 +72,8 @@ public class StatistiquesBackingBean implements Serializable {
             }
         }
         currentMonth.setData( map );
-        evolutionClientsModel.addSeries( currentMonth );
-        return evolutionClientsModel;
+        evolutionCommandesModel.addSeries( currentMonth );
+        return evolutionCommandesModel;
     }
 
     public Date getDateFin() {
