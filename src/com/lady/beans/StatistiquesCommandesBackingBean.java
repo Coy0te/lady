@@ -40,6 +40,11 @@ public class StatistiquesCommandesBackingBean implements Serializable {
 
     @PostConstruct
     public void init() {
+        createEvolutionCommandesModel();
+        createRepartitionCommandesModel();
+    }
+
+    private void createEvolutionCommandesModel() {
         // Création d'un graphique vide pour qu'il s'affiche et puisse être MAJ via ajax
         evolutionCommandesModel = new CartesianChartModel();
         ChartSeries dummyMonth = new ChartSeries();
@@ -47,11 +52,6 @@ public class StatistiquesCommandesBackingBean implements Serializable {
         dummyMonth.set( 0, 0 );
         evolutionCommandesModel.addSeries( dummyMonth );
     }
-
-    /*
-     * TODO : evolution nombre de commandes sur un mois / une année - evolution bénéfices sur un mois / une année - répartition commandes /
-     * clients - répartition clients / bénéfices
-     */
 
     public CartesianChartModel getEvolutionCommandesModel() {
         if ( dateDebut == null ) {
@@ -86,6 +86,10 @@ public class StatistiquesCommandesBackingBean implements Serializable {
     }
 
     public PieChartModel getRepartitionCommandesModel() {
+        return repartitionCommandesModel;
+    }
+
+    private void createRepartitionCommandesModel() {
         repartitionCommandesModel = new PieChartModel();
         List<Commande> commandes = commandeDao.lister();
         Map<String, Number> map = new TreeMap<String, Number>();
@@ -100,7 +104,6 @@ public class StatistiquesCommandesBackingBean implements Serializable {
             }
         }
         repartitionCommandesModel.setData( map );
-        return repartitionCommandesModel;
     }
 
     public Date getDateFin() {
