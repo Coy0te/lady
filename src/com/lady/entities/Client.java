@@ -31,10 +31,12 @@ public class Client {
     private String       portable;
     @NotNull( message = "{adresseClient.requis}" )
     private String       adresse;
+    @NotNull( message = "{nomClient.requis}" )
+    private String       nom;
     private Integer      taille;        // cm
     private Integer      poids;         // jin
-    private Integer      tourDePoitrine; // XiongWei, cm
-    private Integer      tourDeTaille;  // YaoWei, cm
+    private String       tourDePoitrine; // XiongWei, cm
+    private String       tourDeTaille;  // YaoWei, cm
     private Integer      pointure;
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn( name = "modePaiement" )
@@ -98,19 +100,19 @@ public class Client {
         this.poids = poids;
     }
 
-    public Integer getTourDePoitrine() {
+    public String getTourDePoitrine() {
         return tourDePoitrine;
     }
 
-    public void setTourDePoitrine( Integer tourDePoitrine ) {
+    public void setTourDePoitrine( String tourDePoitrine ) {
         this.tourDePoitrine = tourDePoitrine;
     }
 
-    public Integer getTourDeTaille() {
+    public String getTourDeTaille() {
         return tourDeTaille;
     }
 
-    public void setTourDeTaille( Integer tourDeTaille ) {
+    public void setTourDeTaille( String tourDeTaille ) {
         this.tourDeTaille = tourDeTaille;
     }
 
@@ -128,5 +130,13 @@ public class Client {
 
     public void setDateCreation( Date date ) {
         this.dateCreation = date;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom( String nom ) {
+        this.nom = nom;
     }
 }

@@ -27,6 +27,7 @@ public class StatistiquesClientsBackingBean implements Serializable {
 
     private Date                dateDebut;
     private Date                dateFin;
+    private int                 maxClientsJour;
 
     private CartesianChartModel evolutionClientsModel;
 
@@ -68,7 +69,7 @@ public class StatistiquesClientsBackingBean implements Serializable {
         DateTimeFormatter fmt = DateTimeFormat.forPattern( "yyyy年MM月dd日" );
         for ( Client client : clients ) {
             date = new DateTime( client.getDateCreation() ).toDateMidnight().toString( fmt );
-            Number count = map.get( date );
+            Number count = (Integer) map.get( date );
             if ( count == null ) {
                 map.put( date, 1 );
             } else {
@@ -77,6 +78,8 @@ public class StatistiquesClientsBackingBean implements Serializable {
         }
         currentMonth.setData( map );
         evolutionClientsModel.addSeries( currentMonth );
+
+        // maxClientsJour = (Integer) Collections.max( map.values() );
         return evolutionClientsModel;
     }
 

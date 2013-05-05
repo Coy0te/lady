@@ -31,6 +31,11 @@
 					<f:ajax event="blur" render="adresseValidationPic" />
 				</h:inputText>
 				<h:graphicImage id="adresseValidationPic" library="default" styleClass="validationPic" name="css/images/#{facesContext.validationFailed ? 'ko' : 'blank'}.png" />
+				<h:outputLabel for="nom">#{i18n.nomClient} <span class="requis">*</span></h:outputLabel>
+				<h:inputText id="nom" value="#{creerClientBean.client.nom}" maxlength="100">
+					<f:ajax event="blur" render="nomValidationPic" />
+				</h:inputText>
+				<h:graphicImage id="nomValidationPic" library="default" styleClass="validationPic" name="css/images/#{facesContext.validationFailed ? 'ko' : 'blank'}.png" />
 			</fieldset>
 			
 			<fieldset>

@@ -27,6 +27,10 @@
    				#{client.adresse}
    			</h:column>
    			<h:column>
+   				<f:facet name="header">#{i18n.nomClient}</f:facet>
+   				#{client.nom}
+   			</h:column>
+   			<h:column>
    				<f:facet name="header">#{i18n.dateCreationClient}</f:facet>
    				#{of:formatDate(client.dateCreation, 'yyyy年MM月dd日')}
    			</h:column>
