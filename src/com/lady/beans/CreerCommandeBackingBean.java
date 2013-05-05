@@ -2,6 +2,7 @@ package com.lady.beans;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -29,17 +30,18 @@ public class CreerCommandeBackingBean implements Serializable {
     private static final String  URL_PAGE_COMMANDE = "/listerCommandes.jsf?commandeId=";
 
     private Commande             commande;
+    private Produit              produit;
+    private List<Produit>        produits;
     private List<ModePaiement>   modesPaiement;
     private List<Client>         clients;
-    private List<Produit>        produits;
     private List<ModeExpedition> modesExpedition;
 
     @EJB
     private CommandeDao          commandeDao;
     @EJB
-    private ClientDao            clientDao;
-    @EJB
     private ProduitDao           produitDao;
+    @EJB
+    private ClientDao            clientDao;
     @EJB
     private ModePaiementDao      modePaiementDao;
     @EJB
@@ -48,9 +50,10 @@ public class CreerCommandeBackingBean implements Serializable {
     @PostConstruct
     public void init() {
         commande = new Commande();
+        produit = new Produit();
+        produits = new ArrayList<Produit>();
         modesPaiement = modePaiementDao.lister();
         clients = clientDao.lister();
-        produits = produitDao.lister();
         modesExpedition = modeExpeditionDao.lister();
     }
 
@@ -62,16 +65,20 @@ public class CreerCommandeBackingBean implements Serializable {
         return clients;
     }
 
-    public List<Produit> getProduits() {
-        return produits;
-    }
-
     public List<ModeExpedition> getModesExpedition() {
         return modesExpedition;
     }
 
+    public void ajouterProduit() throws IOException {
+        produits.add( produit );
+        produit = new Produit();
+    }
+
     public void creer() throws IOException {
         commandeDao.creer( commande );
+        for ( Produit produit : produits ) {
+            produitDao.creer( produit );
+        }
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         externalContext.redirect( externalContext.getRequestContextPath() + URL_PAGE_COMMANDE
                 + String.valueOf( commande.getId() ) );
@@ -83,5 +90,17 @@ public class CreerCommandeBackingBean implements Serializable {
 
     public void setCommande( Commande commande ) {
         this.commande = commande;
+    }
+
+    public Produit getProduit() {
+        return produit;
+    }
+
+    public void setProduit( Produit produit ) {
+        this.produit = produit;
+    }
+
+    public List<Produit> getProduits() {
+        return produits;
     }
 }

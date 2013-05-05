@@ -27,10 +27,12 @@
 			<f:ajax event="blur" render="dateFinMessage" />
 		</h:inputText>
 		<p:message id="dateFinMessage" for="dateFin" errorClass="erreur" />
-	
-		<h:commandButton id="bouton" value="#{i18n.boutonAfficherStats}" type="submit" styleClass="btn btn-primary right-flt">
-			<f:ajax execute="@form" render="@form :form:graphiques" />
-		</h:commandButton>
+		
+		<div class="rowButton">
+			<h:commandButton id="bouton" value="#{i18n.boutonAfficherStats}" type="submit" styleClass="btn btn-primary right-flt">
+				<f:ajax execute="@form" render="@form :form:graphiques" />
+			</h:commandButton>
+		</div>
 		</fieldset>
 		
 		<h:panelGroup id="graphiques">

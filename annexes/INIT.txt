@@ -45,9 +45,11 @@ INSERT INTO mode_paiement (modePaiement)  VALUES( "支付宝 (Zhi Fu Bao)" );
 CREATE TABLE  bdd_lady.produit (
   id INT( 11 ) NOT NULL AUTO_INCREMENT ,  
   nom VARCHAR( 100 ) NOT NULL, 
-  taille VARCHAR( 10 ) ,
-  dateCreation DATETIME NOT NULL ,
-  PRIMARY KEY ( id )
+  commande INT( 11 ) NOT NULL ,
+  prixCoutant INT( 8 ) NOT NULL ,  
+  prixFacture INT( 8 ) NOT NULL ,  
+  PRIMARY KEY ( id ) ,
+  CONSTRAINT fk_commande_produit FOREIGN KEY (commande) REFERENCES commande(id)
 ) 
 ENGINE = INNODB;
 
@@ -75,8 +77,6 @@ INSERT INTO client (pseudo, portable, adresse, dateCreation)  VALUES( "地方分
 CREATE TABLE  bdd_lady.commande (
   id INT( 11 ) NOT NULL AUTO_INCREMENT ,  
   client INT( 11 ) NOT NULL ,  
-  prixCoutant INT( 8 ) NOT NULL ,  
-  prixFacture INT( 8 ) NOT NULL ,  
   modePaiement INT( 11 ) ,
   datePaiement DATETIME ,  
   dateCommandeProduits DATETIME ,  
@@ -88,13 +88,4 @@ CREATE TABLE  bdd_lady.commande (
   CONSTRAINT fk_mode_expedition_commande FOREIGN KEY (modeExpedition) REFERENCES mode_expedition(id) ,
   CONSTRAINT fk_client_commande FOREIGN KEY (client) REFERENCES client(id)
 ) 
-ENGINE = INNODB;
-
-
-CREATE TABLE  bdd_lady.produits_commandes (
-  produit INT( 11 ) NOT NULL ,  
-  commande INT( 11 ) NOT NULL ,  
-  CONSTRAINT fk_produit_PC FOREIGN KEY (produit) REFERENCES produit(id),
-  CONSTRAINT fk_commande_PC FOREIGN KEY (commande) REFERENCES commande(id)
-)
 ENGINE = INNODB;

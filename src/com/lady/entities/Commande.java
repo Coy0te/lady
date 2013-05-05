@@ -1,6 +1,7 @@
 package com.lady.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,31 +21,27 @@ import javax.validation.constraints.NotNull;
 public class Commande {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private Long         id;
+    private Long          id;
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn( name = "client" )
     @NotNull( message = "{clientCommande.requis}" )
-    private Client       client;
-    @OneToOne( fetch = FetchType.LAZY, mappedBy = "commande" )
+    private Client        client;
+    @OneToMany( fetch = FetchType.LAZY, mappedBy = "commande" )
     @NotNull( message = "{produitsCommande.requis}" )
-    private Produit      produit;
-    @NotNull( message = "{prixCoutantCommande.requis}" )
-    private Integer      prixCoutant;
-    @NotNull( message = "{prixFactureCommande.requis}" )
-    private Integer      prixFacture;
+    private List<Produit> produits;
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn( name = "modePaiement" )
     @NotNull( message = "{modePaiementCommande.requis}" )
-    private ModePaiement modePaiement;
+    private ModePaiement  modePaiement;
     @Temporal( TemporalType.TIMESTAMP )
-    private Date         datePaiement;
+    private Date          datePaiement;
     @Temporal( TemporalType.TIMESTAMP )
-    private Date         dateCommandeProduits;
+    private Date          dateCommandeProduits;
     @Temporal( TemporalType.TIMESTAMP )
-    private Date         dateReceptionProduits;
+    private Date          dateReceptionProduits;
     @Temporal( TemporalType.TIMESTAMP )
-    private Date         dateExpeditionProduits;
-    private String       modeExpedition;
+    private Date          dateExpeditionProduits;
+    private String        modeExpedition;
 
     public Long getId() {
         return id;
@@ -62,28 +59,20 @@ public class Commande {
         this.client = client;
     }
 
-    public Produit getProduit() {
-        return produit;
+    public List<Produit> getProduits() {
+        return produits;
     }
 
-    public void setProduit( Produit produit ) {
-        this.produit = produit;
+    public void setProduits( List<Produit> produits ) {
+        this.produits = produits;
     }
 
-    public Integer getPrixCoutant() {
-        return prixCoutant;
+    public void addProduit( Produit produit ) {
+        this.produits.add( produit );
     }
 
-    public void setPrixCoutant( Integer prixCoutant ) {
-        this.prixCoutant = prixCoutant;
-    }
-
-    public Integer getPrixFacture() {
-        return prixFacture;
-    }
-
-    public void setPrixFacture( Integer prixFacture ) {
-        this.prixFacture = prixFacture;
+    public void removeProduit( Produit produit ) {
+        this.produits.remove( produit );
     }
 
     public ModePaiement getModePaiement() {

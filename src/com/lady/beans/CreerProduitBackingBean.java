@@ -2,7 +2,6 @@ package com.lady.beans;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -39,15 +38,9 @@ public class CreerProduitBackingBean implements Serializable {
 
     public void creer() throws IOException {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        initialiserDateCreation();
         produitDao.creer( produit );
         externalContext.redirect( externalContext.getRequestContextPath() + URL_PAGE_PRODUIT
                 + String.valueOf( produit.getId() ) );
-    }
-
-    private void initialiserDateCreation() {
-        Timestamp date = new Timestamp( System.currentTimeMillis() );
-        produit.setDateCreation( date );
     }
 
     public Produit getProduit() {

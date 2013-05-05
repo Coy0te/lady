@@ -1,18 +1,13 @@
 package com.lady.entities;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -24,17 +19,13 @@ public class Produit {
     private Long     id;
     @NotNull( message = "{nomProduit.requis}" )
     private String   nom;
-    private String   taille;
+    @NotNull( message = "{prixCoutantProduit.requis}" )
+    private Integer  prixCoutant;
+    @NotNull( message = "{prixFactureProduit.requis}" )
+    private Integer  prixFacture;
     @ManyToOne( fetch = FetchType.LAZY )
-    @JoinTable(
-            name = "produits_commandes",
-            joinColumns =
-            @JoinColumn( name = "produit", referencedColumnName = "id" ),
-            inverseJoinColumns =
-            @JoinColumn( name = "commande", referencedColumnName = "id" ) )
+    @JoinColumn( name = "commande" )
     private Commande commande;
-    @Temporal( TemporalType.TIMESTAMP )
-    private Date     dateCreation;
 
     public Long getId() {
         return id;
@@ -52,19 +43,27 @@ public class Produit {
         this.nom = nom;
     }
 
-    public String getTaille() {
-        return taille;
+    public Integer getPrixCoutant() {
+        return prixCoutant;
     }
 
-    public void setTaille( String taille ) {
-        this.taille = taille;
+    public void setPrixCoutant( Integer prixCoutant ) {
+        this.prixCoutant = prixCoutant;
     }
 
-    public Date getDateCreation() {
-        return dateCreation;
+    public Integer getPrixFacture() {
+        return prixFacture;
     }
 
-    public void setDateCreation( Date dateCreation ) {
-        this.dateCreation = dateCreation;
+    public void setPrixFacture( Integer prixFacture ) {
+        this.prixFacture = prixFacture;
+    }
+
+    public Commande getCommande() {
+        return commande;
+    }
+
+    public void setCommande( Commande commande ) {
+        this.commande = commande;
     }
 }
