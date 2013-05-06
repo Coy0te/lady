@@ -27,7 +27,6 @@ public class Commande {
     @NotNull( message = "{clientCommande.requis}" )
     private Client        client;
     @OneToMany( fetch = FetchType.LAZY, mappedBy = "commande" )
-    @NotNull( message = "{produitsCommande.requis}" )
     private List<Produit> produits;
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn( name = "modePaiement" )

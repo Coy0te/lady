@@ -14,7 +14,7 @@
 	<ui:define name="body">
 		<h2>#{i18n.listerProduits}</h2>
 		<h:form id="form">
-   		<h:dataTable value="#{listerProduitsBean.produits}" var="produit" rowClasses="odd,even" id="tableauProduits">
+   		<h:dataTable styleClass="liste" value="#{listerProduitsBean.produits}" var="produit" rowClasses="odd,even" id="tableauProduits">
    			<h:column>
    				<f:facet name="header">#{i18n.nomProduit}</f:facet>
    				#{produit.nom}

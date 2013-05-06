@@ -72,7 +72,7 @@
 							<f:ajax event="blur" render="prixFactureMessage benef" />
 						</h:inputText>
 						<h:commandButton id="ajouterProduit" value="#{i18n.boutonCreerProduit}" type="submit" action="#{creerCommandeBean.ajouterProduit()}" styleClass="btn btn-primary right-flt">
-							<f:ajax execute="nomProduit prixCoutant prixFacture" render="produits" />
+							<f:ajax execute="nomProduit prixCoutant prixFacture" render="produits boutonsCommande" />
 						</h:commandButton>	
 					</h:panelGrid>
 					<h:panelGrid columns="4">
@@ -130,12 +130,12 @@
 				<p:message id="modeExpeditionMessage" for="modeExpedition" errorClass="erreur" />
 			</fieldset>
 			
-			<div class="rowButton">
-				<h:commandButton value="#{i18n.boutonCreerCommande}" type="submit" action="#{creerCommandeBean.creer()}" styleClass="btn btn-primary right-flt">
-					<f:ajax execute="@form" render="@form" />
+			<h:panelGroup id="boutonsCommande" layout="block" class="rowButton">
+				<h:commandButton rendered="#{!empty creerCommandeBean.produits}" value="#{i18n.boutonCreerCommande}" type="submit" action="#{creerCommandeBean.creer()}" styleClass="btn btn-primary right-flt">
+					<f:ajax execute="client modePaiement datePaiement dateCommandeProduits dateReceptionProduits dateExpeditionProduits modeExpedition" render="@form" />
 				</h:commandButton>
 				<h:commandButton value="#{i18n.remettreAZero}" type="reset" styleClass="btn showMarkdownOverview" />
-			</div>
+			</h:panelGroup>
 		</h:form>
 	</ui:define>
 </ui:composition>

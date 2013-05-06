@@ -50,7 +50,7 @@ public class CreerCommandeBackingBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        int benefices = 0;
+        benefices = 0;
         commande = new Commande();
         produit = new Produit();
         produits = new ArrayList<Produit>();
@@ -84,8 +84,10 @@ public class CreerCommandeBackingBean implements Serializable {
     public void creer() throws IOException {
         commandeDao.creer( commande );
         for ( Produit produit : produits ) {
+            produit.setCommande( commande );
             produitDao.creer( produit );
         }
+        commande = commandeDao.rafraichir( commande );
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         externalContext.redirect( externalContext.getRequestContextPath() + URL_PAGE_COMMANDE
                 + String.valueOf( commande.getId() ) );

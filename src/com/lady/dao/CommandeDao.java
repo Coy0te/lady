@@ -21,7 +21,7 @@ public class CommandeDao {
     @PersistenceContext( unitName = "bdd_lady_PU" )
     private EntityManager       em;
 
-    // Enregistrement d'une nouvelle commande
+    /* Enregistrement d'une nouvelle commande */
     public void creer( Commande commande ) throws DAOException {
         try {
             em.persist( commande );
@@ -56,6 +56,17 @@ public class CommandeDao {
     public Commande trouver( long id ) throws DAOException {
         try {
             return em.find( Commande.class, id );
+        } catch ( Exception e ) {
+            throw new DAOException( e );
+        }
+    }
+
+    /* Rafraichissement d'une commande existante */
+    public Commande rafraichir( Commande commande ) throws DAOException {
+        try {
+            Commande managedCommande = em.find( Commande.class, commande.getId() );
+            em.refresh( managedCommande );
+            return managedCommande;
         } catch ( Exception e ) {
             throw new DAOException( e );
         }

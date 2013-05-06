@@ -14,18 +14,20 @@
 	<ui:define name="body">
 		<h2>#{i18n.listerCommandes}</h2>
 		<h:form id="form">
-   		<h:dataTable value="#{listerCommandesBean.commandes}" var="commande" rowClasses="odd,even" id="tableauCommandes">
+   		<h:dataTable styleClass="liste" value="#{listerCommandesBean.commandes}" var="commande" rowClasses="odd,even" id="tableauCommandes">
    			<h:column>
    				<f:facet name="header">#{i18n.clientCommande}</f:facet>
    				#{commande.client.pseudo}
    			</h:column>
    			<h:column>
    				<f:facet name="header">#{i18n.produitsCommande}</f:facet>
-   				#{commande.produit.nom}
+   				<ui:repeat value="#{commande.produits}" var="produit">
+   					#{produit.nom} - 
+   				</ui:repeat>
    			</h:column>
    			<h:column>
    				<f:facet name="header">#{i18n.beneficesCommande}</f:facet>
-   				#{commande.prixFacture - commande.prixCoutant}
+   				caca
    			</h:column>
    			<h:column>
    				<f:facet name="header">#{i18n.modePaiementCommande}</f:facet>

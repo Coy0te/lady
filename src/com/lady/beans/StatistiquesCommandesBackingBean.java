@@ -21,6 +21,7 @@ import org.primefaces.model.chart.PieChartModel;
 import com.lady.dao.CommandeDao;
 import com.lady.entities.Client;
 import com.lady.entities.Commande;
+import com.lady.entities.Produit;
 
 @ManagedBean( name = "statsCommandesBean" )
 @ViewScoped
@@ -70,8 +71,10 @@ public class StatistiquesCommandesBackingBean implements Serializable {
         prixFactureTotal = 0;
         prixCoutantTotal = 0;
         for ( Commande commande : commandes ) {
-            prixFactureTotal += commande.getPrixFacture();
-            prixCoutantTotal += commande.getPrixCoutant();
+            for ( Produit produit : commande.getProduits() ) {
+                prixFactureTotal += produit.getPrixFacture();
+                prixCoutantTotal += produit.getPrixCoutant();
+            }
             date = new DateTime( commande.getDatePaiement() ).toDateMidnight().toString( fmt );
             Number count = map.get( date );
             if ( count == null ) {
