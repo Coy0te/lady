@@ -48,12 +48,20 @@
 			   				#{produit.prixFacture - produit.prixCoutant}
 			   			</h:column>
 			   		</h:dataTable>
-			   		<h:panelGrid columns="3">
+					<hr style="clear: both; "/>
+					<h:panelGroup id="benef">
+						<h:outputLabel for="benefices">#{i18n.beneficesCommande} = </h:outputLabel>
+						<h:outputText id="benefices"
+									  rendered="#{creerCommandeBean.benefices != 0}" 
+									  value="#{creerCommandeBean.benefices}"/>
+					</h:panelGroup>
+			   		<h:panelGrid columns="4" style="margin: 0;">
 						<h:outputLabel styleClass="grid" for="nomProduit">#{i18n.nomProduit} <span class="requis">*</span></h:outputLabel>
 						<h:outputLabel styleClass="grid" for="prixCoutant">#{i18n.prixCoutantProduit} <span class="requis">*</span></h:outputLabel>
 						<h:outputLabel styleClass="grid" for="prixFacture">#{i18n.prixFactureProduit} <span class="requis">*</span></h:outputLabel>
+						<h:outputLabel styleClass="grid" for="ajouterProduit"> </h:outputLabel>
 					</h:panelGrid>
-					<h:panelGrid columns="3">
+					<h:panelGrid columns="4" style="margin: 0;">
 						<h:inputText id="nomProduit" value="#{creerCommandeBean.produit.nom}">
 							<f:ajax event="blur" render="nomProduitMessage" />
 						</h:inputText>
@@ -63,24 +71,15 @@
 						<h:inputText id="prixFacture" value="#{creerCommandeBean.produit.prixFacture}">
 							<f:ajax event="blur" render="prixFactureMessage benef" />
 						</h:inputText>
+						<h:commandButton id="ajouterProduit" value="#{i18n.boutonCreerProduit}" type="submit" action="#{creerCommandeBean.ajouterProduit()}" styleClass="btn btn-primary right-flt">
+							<f:ajax execute="nomProduit prixCoutant prixFacture" render="produits" />
+						</h:commandButton>	
 					</h:panelGrid>
-					<h:panelGrid columns="3">
+					<h:panelGrid columns="4">
 						<p:message id="nomProduitMessage" for="nomProduit" errorClass="erreur" />
 						<p:message id="prixCoutantMessage" for="prixCoutant" errorClass="erreur" />
 						<p:message id="prixFactureMessage" for="prixFacture" errorClass="erreur" />
 					</h:panelGrid>
-				</h:panelGroup>
-				
-				<h:commandButton value="#{i18n.boutonCreerProduit}" type="submit" action="#{creerCommandeBean.ajouterProduit()}" styleClass="btn btn-primary right-flt">
-					<f:ajax execute="nomProduit prixCoutant prixFacture" render="produits" />
-				</h:commandButton>				
-				
-				<hr style="clear: both; "/>
-				<h:panelGroup id="benef">
-					<h:outputLabel for="benefices">#{i18n.beneficesCommande} = #{creerProduitBean.produit.prixFacture > creerProduitBean.produit.prixCourant ? '+' : ''} </h:outputLabel>
-					<h:outputText id="benefices"
-								  rendered="#{creerProduitBean.produit.prixFacture != null and creerProduitBean.produit.prixCoutant != null}" 
-								  value="#{creerProduitBean.produit.prixFacture - creerProduitBean.produit.prixCoutant}"/>
 				</h:panelGroup>
 			</fieldset>
 			

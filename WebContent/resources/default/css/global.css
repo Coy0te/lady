@@ -51,10 +51,14 @@ table.liste td input.btn-primary{
 	margin-top: 0px;
 }
 
+#creationCommandeForm table input[type="submit"]{
+	margin-top: 0;
+}
+
 fieldset {
     padding: 10px;
     border: 2px #03638b solid;
-    width: 500px;
+    width: 600px;
     margin: 10px auto;
 	border-radius: 5px;
 	-moz-border-radius: 5px;

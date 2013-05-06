@@ -31,6 +31,7 @@ public class CreerCommandeBackingBean implements Serializable {
 
     private Commande             commande;
     private Produit              produit;
+    private int                  benefices;
     private List<Produit>        produits;
     private List<ModePaiement>   modesPaiement;
     private List<Client>         clients;
@@ -49,6 +50,7 @@ public class CreerCommandeBackingBean implements Serializable {
 
     @PostConstruct
     public void init() {
+        int benefices = 0;
         commande = new Commande();
         produit = new Produit();
         produits = new ArrayList<Produit>();
@@ -65,12 +67,17 @@ public class CreerCommandeBackingBean implements Serializable {
         return clients;
     }
 
+    public Integer getBenefices() {
+        return benefices;
+    }
+
     public List<ModeExpedition> getModesExpedition() {
         return modesExpedition;
     }
 
     public void ajouterProduit() throws IOException {
         produits.add( produit );
+        benefices += produit.getPrixFacture() - produit.getPrixCoutant();
         produit = new Produit();
     }
 
