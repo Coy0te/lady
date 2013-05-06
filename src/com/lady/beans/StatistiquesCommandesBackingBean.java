@@ -34,6 +34,7 @@ public class StatistiquesCommandesBackingBean implements Serializable {
     private int                 prixCoutantTotal;
 
     private CartesianChartModel evolutionCommandesModel;
+    private CartesianChartModel evolutionBeneficesModel;
     private PieChartModel       repartitionCommandesModel;
 
     @EJB
@@ -42,7 +43,44 @@ public class StatistiquesCommandesBackingBean implements Serializable {
     @PostConstruct
     public void init() {
         createEvolutionCommandesModel();
+        createEvolutionBeneficesModel();
         createRepartitionCommandesModel();
+    }
+
+    private void createEvolutionBeneficesModel() {
+        // Création d'un graphique vide pour qu'il s'affiche et puisse être MAJ via ajax
+        evolutionBeneficesModel = new CartesianChartModel();
+        ChartSeries dummyMonth = new ChartSeries();
+        dummyMonth.setLabel( "Exemple" );
+        dummyMonth.set( 0, 0 );
+        evolutionBeneficesModel.addSeries( dummyMonth );
+    }
+
+    public CartesianChartModel getEvolutionBeneficesModel() {
+        if ( dateDebut == null ) {
+            return evolutionBeneficesModel;
+        }
+        dateDebut = ( new DateTime( dateDebut ) ).dayOfMonth().withMinimumValue().toDate();
+        dateFin = ( new DateTime( dateFin ) ).dayOfMonth().withMaximumValue().toDate();
+
+        evolutionBeneficesModel = new CartesianChartModel();
+        ChartSeries currentMonth = new ChartSeries();
+        List<Commande> commandes = commandeDao.lister( dateDebut, dateFin );
+        Map<Object, Number> map = new TreeMap<Object, Number>();
+        int prixFactureCommande;
+        int prixCoutantCommande;
+        for ( Commande commande : commandes ) {
+            prixFactureCommande = 0;
+            prixCoutantCommande = 0;
+            for ( Produit produit : commande.getProduits() ) {
+                prixFactureCommande += produit.getPrixFacture();
+                prixCoutantCommande += produit.getPrixCoutant();
+            }
+            map.put( commande.getId(), prixFactureCommande - prixCoutantCommande );
+        }
+        currentMonth.setData( map );
+        evolutionBeneficesModel.addSeries( currentMonth );
+        return evolutionBeneficesModel;
     }
 
     private void createEvolutionCommandesModel() {
