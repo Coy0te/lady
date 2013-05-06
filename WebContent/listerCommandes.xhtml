@@ -27,7 +27,7 @@
    			</h:column>
    			<h:column>
    				<f:facet name="header">#{i18n.beneficesCommande}</f:facet>
-   				caca
+   				#{listerCommandesBean.calculBenefices(commande)}
    			</h:column>
    			<h:column>
    				<f:facet name="header">#{i18n.modePaiementCommande}</f:facet>
@@ -44,6 +44,7 @@
 				</h:commandButton>
    			</h:column>
    		</h:dataTable>
+   		<h2>Bénéfice total : #{listerCommandesBean.beneficesTotal}</h2>
 		</h:form>
 	</ui:define>
 </ui:composition>
