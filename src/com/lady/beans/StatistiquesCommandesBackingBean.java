@@ -65,6 +65,7 @@ public class StatistiquesCommandesBackingBean implements Serializable {
 
         evolutionBeneficesModel = new CartesianChartModel();
         ChartSeries currentMonth = new ChartSeries();
+        currentMonth.setLabel( "Bénéfices" );
         List<Commande> commandes = commandeDao.lister( dateDebut, dateFin );
         Map<Object, Number> map = new TreeMap<Object, Number>();
         int prixFactureCommande;
@@ -101,6 +102,7 @@ public class StatistiquesCommandesBackingBean implements Serializable {
 
         evolutionCommandesModel = new CartesianChartModel();
         ChartSeries currentMonth = new ChartSeries();
+        currentMonth.setLabel( "Nombre de commandes" );
 
         List<Commande> commandes = commandeDao.lister( dateDebut, dateFin );
         Map<Object, Number> map = new TreeMap<Object, Number>();

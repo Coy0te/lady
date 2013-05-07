@@ -62,6 +62,7 @@ public class StatistiquesClientsBackingBean implements Serializable {
 
         evolutionClientsModel = new CartesianChartModel();
         ChartSeries currentMonth = new ChartSeries();
+        currentMonth.setLabel( "Nombre de clients" );
 
         List<Client> clients = clientDao.lister( dateDebut, dateFin );
         Map<Object, Number> map = new TreeMap<Object, Number>();
