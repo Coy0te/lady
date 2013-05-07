@@ -30,10 +30,6 @@
    				#{listerCommandesBean.calculBenefices(commande)}
    			</h:column>
    			<h:column>
-   				<f:facet name="header">#{i18n.modePaiementCommande}</f:facet>
-   				#{commande.modePaiement.modePaiement}
-   			</h:column>
-   			<h:column>
    				<f:facet name="header">#{i18n.datePaiementCommande}</f:facet>
    				#{of:formatDate(commande.datePaiement, 'yyyy年MM月dd日')}
    			</h:column>

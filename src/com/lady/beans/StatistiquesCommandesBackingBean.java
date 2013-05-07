@@ -70,14 +70,17 @@ public class StatistiquesCommandesBackingBean implements Serializable {
         Map<Object, Number> map = new TreeMap<Object, Number>();
         int prixFactureCommande;
         int prixCoutantCommande;
+        DateTimeFormatter fmt = DateTimeFormat.forPattern( "MM月dd日" );
+        String date;
         for ( Commande commande : commandes ) {
             prixFactureCommande = 0;
             prixCoutantCommande = 0;
+            date = new DateTime( commande.getDatePaiement() ).toDateMidnight().toString( fmt );
             for ( Produit produit : commande.getProduits() ) {
                 prixFactureCommande += produit.getPrixFacture();
                 prixCoutantCommande += produit.getPrixCoutant();
             }
-            map.put( commande.getId(), prixFactureCommande - prixCoutantCommande );
+            map.put( date, prixFactureCommande - prixCoutantCommande );
         }
         currentMonth.setData( map );
         evolutionBeneficesModel.addSeries( currentMonth );
@@ -107,7 +110,7 @@ public class StatistiquesCommandesBackingBean implements Serializable {
         List<Commande> commandes = commandeDao.lister( dateDebut, dateFin );
         Map<Object, Number> map = new TreeMap<Object, Number>();
         String date = null;
-        DateTimeFormatter fmt = DateTimeFormat.forPattern( "yyyy年MM月dd日" );
+        DateTimeFormatter fmt = DateTimeFormat.forPattern( "MM月dd日" );
         prixFactureTotal = 0;
         prixCoutantTotal = 0;
         for ( Commande commande : commandes ) {
