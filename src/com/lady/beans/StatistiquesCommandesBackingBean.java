@@ -22,6 +22,7 @@ import com.lady.dao.CommandeDao;
 import com.lady.entities.Client;
 import com.lady.entities.Commande;
 import com.lady.entities.Produit;
+import com.lady.tools.MapUtil;
 
 @ManagedBean( name = "statsCommandesBean" )
 @ViewScoped
@@ -141,14 +142,21 @@ public class StatistiquesCommandesBackingBean implements Serializable {
         Map<String, Number> map = new TreeMap<String, Number>();
         Client client = null;
         for ( Commande commande : commandes ) {
+            int prixFactureCommande = 0;
+            int prixCoutantCommande = 0;
+            for ( Produit produit : commande.getProduits() ) {
+                prixFactureCommande += produit.getPrixFacture();
+                prixCoutantCommande += produit.getPrixCoutant();
+            }
             client = commande.getClient();
-            Number count = map.get( client.getPseudo() );
-            if ( count == null ) {
-                map.put( client.getPseudo(), 1 );
+            Number benefClient = map.get( client.getPseudo() );
+            if ( benefClient == null ) {
+                map.put( client.getPseudo(), prixFactureCommande - prixCoutantCommande );
             } else {
-                map.put( client.getPseudo(), count.intValue() + 1 );
+                map.put( client.getPseudo(), benefClient.intValue() + prixFactureCommande - prixCoutantCommande );
             }
         }
+        map = MapUtil.sortByValue( map );
         repartitionCommandesModel.setData( map );
     }
 
