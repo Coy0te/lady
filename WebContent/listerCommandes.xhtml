@@ -14,7 +14,7 @@
 	<ui:define name="body">
 		<h2>#{i18n.listerCommandes}</h2>
 		<h:form id="form">
-   		<h:dataTable styleClass="liste" value="#{listerCommandesBean.commandes}" var="commande" rowClasses="odd,even" id="tableauCommandes">
+   		<h:dataTable styleClass="liste" value="#{listerCommandesBean.commandes}" var="commande" rowClasses="odd,even" columnClasses="col1, col2" id="tableauCommandes">
    			<h:column>
    				<f:facet name="header">#{i18n.clientCommande}</f:facet>
    				#{commande.client.pseudo}

@@ -55,6 +55,10 @@ table.liste td input.btn-primary{
 	margin-top: 0;
 }
 
+.col2{
+	width: 250px;
+}
+
 fieldset {
     padding: 10px;
     border: 2px #03638b solid;
