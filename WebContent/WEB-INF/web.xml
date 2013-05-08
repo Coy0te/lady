@@ -9,6 +9,10 @@
     <javaee:param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</javaee:param-name>
     <javaee:param-value>true</javaee:param-value>
   </context-param>
+  <context-param>
+    <javaee:param-name>primefaces.THEME</javaee:param-name>
+    <javaee:param-value>none</javaee:param-value>
+  </context-param>
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
