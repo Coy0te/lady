@@ -15,7 +15,10 @@
 		<h2>#{i18n.listerCommandes}</h2>
 		<h:form id="form">
    		<p:dataTable styleClass="liste" value="#{listerCommandesBean.commandes}" var="commande" rowClasses="odd,even" columnClasses="col1, col2" 
-   					id="tableauCommandes" editable="true" editMode="cell">
+   					id="tableauCommandes" editable="true">
+   		    <p:ajax event="rowEdit" listener="#{listerCommandesBean.onEdit}" update="@this" />  
+    	    <p:ajax event="rowEditCancel" listener="#{listerCommandesBean.onCancel}" update="@this" />  
+   		
    			<p:column headerText="#{i18n.clientCommande}">
    				#{commande.client.pseudo}
    			</p:column>
@@ -39,6 +42,9 @@
 				    </f:facet>
 				</p:cellEditor>
    			</p:column>
+   			<p:column style="width:6%">  
+            	<p:rowEditor />  
+       		</p:column> 
    			<p:column headerText="#{i18n.actions}">
    				<h:commandButton onclick="return confirm('#{i18n.confirmation}');" value="#{i18n.supprimer}" type="submit" action="#{listerCommandesBean.supprimer(commande)}" styleClass="btn btn-primary right-flt">
 					<f:ajax render="@form :form:tableauCommandes" />
