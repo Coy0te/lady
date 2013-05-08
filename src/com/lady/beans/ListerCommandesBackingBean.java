@@ -8,6 +8,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.event.RowEditEvent;
+
 import com.lady.dao.CommandeDao;
 import com.lady.entities.Commande;
 import com.lady.entities.Produit;
@@ -49,5 +51,15 @@ public class ListerCommandesBackingBean implements Serializable {
 
     public int getBeneficesTotal() {
         return beneficesTotal;
+    }
+
+    public void onCancel( RowEditEvent event ) {
+        // do nothing
+    }
+
+    public void onEdit( RowEditEvent event ) {
+        Commande commandeEditee = (Commande) event.getObject();
+        commandeDao.rafraichir( commandeEditee );
+        System.out.println( ">>>>>>>> " + commandeEditee.getDatePaiement() );
     }
 }
