@@ -61,11 +61,22 @@ public class CommandeDao {
         }
     }
 
-    /* Rafraichissement d'une commande existante */
-    public Commande rafraichir( Commande commande ) throws DAOException {
+    /* Mise à jour d'une commande existante */
+    public Commande mettreAJour( Commande commande ) throws DAOException {
         try {
             commande = em.merge( commande );
             return commande;
+        } catch ( Exception e ) {
+            throw new DAOException( e );
+        }
+    }
+
+    /* Rafraichissement d'une commande */
+    public Commande rafraichir( Commande commande ) throws DAOException {
+        try {
+            Commande managedCommande = em.find( Commande.class, commande.getId() );
+            em.refresh( managedCommande );
+            return managedCommande;
         } catch ( Exception e ) {
             throw new DAOException( e );
         }

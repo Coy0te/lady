@@ -59,7 +59,7 @@ public class ListerCommandesBackingBean implements Serializable {
 
     public void onEdit( RowEditEvent event ) {
         Commande commandeEditee = (Commande) event.getObject();
-        commandeDao.rafraichir( commandeEditee );
+        commandeDao.mettreAJour( commandeEditee );
         System.out.println( ">>>>>>>> " + commandeEditee.getDatePaiement() );
     }
 }
